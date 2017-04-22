@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: paper.aux
+The style file: plain.bst
+Database file #1: refs.bib.bib
+Name 1 in "J. Pommersheim, T. Marks, and E. Flapan" has a comma at the end for entry pommersheim
+while executing---line 1049 of file plain.bst
+Name 1 in "Cristianini, Nello, and John Shawe-Taylor" has a comma at the end for entry christianini
+while executing---line 1049 of file plain.bst
+Name 1 in "Cristianini, Nello, and John Shawe-Taylor" has a comma at the end for entry christianini
+while executing---line 1090 of file plain.bst
+Name 1 in "J. Pommersheim, T. Marks, and E. Flapan" has a comma at the end for entry pommersheim
+while executing---line 1090 of file plain.bst
+You've used 4 entries,
+            2118 wiz_defined-function locations,
+            516 strings with 4520 characters,
+and the built_in function-call counts, 936 in all, are:
+= -- 80
+> -- 40
+< -- 0
++ -- 17
+- -- 12
+* -- 40
+:= -- 167
+add.period$ -- 11
+call.type$ -- 4
+change.case$ -- 15
+chr.to.int$ -- 0
+cite$ -- 4
+duplicate$ -- 43
+empty$ -- 89
+format.name$ -- 12
+if$ -- 196
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 6
+newline$ -- 22
+num.names$ -- 8
+pop$ -- 33
+preamble$ -- 1
+purify$ -- 14
+quote$ -- 0
+skip$ -- 30
+stack$ -- 0
+substring$ -- 21
+swap$ -- 4
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 10
+warning$ -- 0
+while$ -- 8
+width$ -- 5
+write$ -- 40
+(There were 4 error messages)

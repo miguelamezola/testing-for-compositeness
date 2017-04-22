@@ -1,0 +1,15 @@
+\beamer@slide {definition:prime}{3}
+\beamer@slide {definition:composite}{3}
+\beamer@slide {definition:divide}{4}
+\beamer@slide {definition:congruent}{5}
+\beamer@slide {example:congruent}{5}
+\beamer@slide {definition:congruence_class}{5}
+\beamer@slide {Definition: Zn}{5}
+\beamer@slide {definition:bianry operation}{7}
+\beamer@slide {my-label}{7}
+\beamer@slide {definition:ring}{7}
+\beamer@slide {definition:field}{7}
+\beamer@slide {Multiplication in Z_7}{9}
+\beamer@slide {Multiplication in Z_8}{9}
+\beamer@slide {theorem:fermats_little_theorem}{10}
+\beamer@slide {algorithm:miller-rabin}{13}
