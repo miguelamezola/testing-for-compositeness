@@ -1091,8 +1091,8 @@
 	\end{example}
 
 	\begin{algorithm}[Miller-Rabin Test for Compositeness]\label{algorithm:miller-rabin}
-		Let $n>0$ be any odd integer. 
-		Then there exists an integer $k > 0$ such that $2^k$ is that largest power of two that divides $n-1$.
+		Let $n \geq 3$ be any odd integer. 
+		Then there exists an integer $k > 0$ such that $2^k$ is the largest power of two that divides $n-1$.
 		If there exists $\bar{a} \in \Z_n$ such that  
 		$$\bar{a}^{\frac{n-1}{2^k}} \neq \bar{1}$$ and 
 		$$\bar{a}^{\frac{n-1}{2^h}} \neq -\bar{1},$$ 

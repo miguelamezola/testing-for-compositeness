@@ -50,17 +50,21 @@ def miller_rabin(n):
 
     base = randint(1,n-1)
 
+    result = "composite"
+
     for k in range(1, (n-1) // 2 + 1):
         exp = (n-1) // pow(2,k)
         rhs = pow(base, exp, n)
-        print(base, exp, rhs)
 
-        #if not (rhs + 1) % n:
-        #    return False
+        print(base, exp, (rhs + 1) % n)
+
+        if not (rhs + 1) % n:
+            result = "not composite"
 
         if (exp / 2) % 1 != 0:
-            #if not (rhs - 1) % n:
-            #    return False
+            print(base, exp, (rhs - 1) % n)
+            if not (rhs - 1) % n:
+                result = "not composite"
             #return {base, True}
-            print(base, exp, rhs)
-            break
+            return result
+
