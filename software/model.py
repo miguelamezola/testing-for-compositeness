@@ -1,31 +1,43 @@
+import os
 from base_b import convert
 from random import randint
 from sklearn.svm import SVC
 from sklearn import preprocessing
+from time import time
 
 DATA_DIR = "./data/"
 RESULTS_DIR = "./results/"
 
-def train(dataset, max_base, max_C, kernel, max_class_weight):
-    for base in range(2, max_base):
+def train(max_base, max_C, kernel, max_class_weight):
 
-        data = get_space(dataset, base)
-        min_max_scaler = preprocessing.MinMaxScaler()
-        X_train = min_max_scaler.fit_transform(data["train.X"])
-        y_train = data["train.y"]
-        X_test = min_max_scaler.fit_transform(data["test.X"])
-        y_test = data["test.y"]
+	for root, dirs, files in os.walk(DATA_DIR):
 
-        C = 0.1
+		for dataset in files:
+			#dataset = os.path.join(root, filename)
 
-        while C <= max_C:
-            for weight in range(1, max_class_weight + 1):
-                c_weight = {1: weight}
-                clf = SVC(C=C, kernel=kernel, cache_size=1000, class_weight=c_weight)
-                clf.fit(X_train, y_train)
-                score = clf.score(X_test, y_test)
-                print(score)
-            C += 0.1
+			result = RESULTS_DIR + "%f_%s" % (time(), dataset)
+			with open(result, "w") as f:
+
+				for base in range(2, max_base):
+
+					data = get_space(dataset, base)
+					min_max_scaler = preprocessing.MinMaxScaler()
+					X_train = min_max_scaler.fit_transform(data["train.X"])
+					y_train = data["train.y"]
+					X_test = min_max_scaler.fit_transform(data["test.X"])
+					y_test = data["test.y"]
+
+					C = 0.1
+
+					while C <= max_C:
+						for weight in range(1, max_class_weight + 1):
+							c_weight = {1: weight}
+							clf = SVC(C=C, kernel=kernel, cache_size=1000, class_weight=c_weight)
+							clf.fit(X_train, y_train)
+							score = clf.score(X_test, y_test)
+							f.write("%d, %f, %s, %d, %f\n" % (base, C, kernel, weight, score))
+							print("%d, %f, %s, %d, %f\n" % (base, C, kernel, weight, score))
+						C += 0.1
 
 
 def get_data(dataset_filename):
