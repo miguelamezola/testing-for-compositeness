@@ -10,6 +10,8 @@ RESULTS_DIR = "./results/"
 
 def train(max_base, max_C, kernel, max_class_weight):
 
+        seed = int(time())
+
 	for root, dirs, files in os.walk(DATA_DIR):
 
 		for dataset in files:
@@ -32,11 +34,11 @@ def train(max_base, max_C, kernel, max_class_weight):
 					while C <= max_C:
 						for weight in range(1, max_class_weight + 1):
 							c_weight = {1: weight}
-							clf = SVC(C=C, kernel=kernel, cache_size=1000, class_weight=c_weight)
+							clf = SVC(C=C, kernel=kernel, cache_size=1000, class_weight=c_weight, random_state=seed)
 							clf.fit(X_train, y_train)
 							score = clf.score(X_test, y_test)
-							f.write("%d, %f, %s, %d, %f\n" % (base, C, kernel, weight, score))
-							print("%d, %f, %s, %d, %f\n" % (base, C, kernel, weight, score))
+							f.write("%d, %d, %f, %s, %d, %f\n" % (seed, base, C, kernel, weight, score))
+							print("%d, %d, %f, %s, %d, %f\n" % (seed, base, C, kernel, weight, score))
 						C += 0.1
 
 
