@@ -1,14 +1,14 @@
 
-DATASETS_DIR = "./datasets/"
+DATASETS_DIR = "./data/datasets/"
 DATASET_SIZE = 1000
-PRIME_LIST_DIR = "./prime_lists/"
+PRIME_LIST_DIR = "./data/prime_lists/"
 RANGE_MAX = 982451653
 
-from random import sample
+from random import shuffle
 from time import time
+from model.primality import trial_division
 
 def is_prime(n):
-
 
     if n < 2:
         return 0
@@ -131,14 +131,19 @@ def is_prime(n):
     return 0
 
 
-def get(dataset_size=DATASET_SIZE, range_max=RANGE_MAX):
-    if dataset_size >= range_max:
-        raise ValueError("dataset size should be less than or equal to range max")
-    pop = range(2, range_max+1)
-    sam = sample(pop, dataset_size)
+def get(minimum, maximum, range_max=RANGE_MAX):
+    if minimum < 2:
+        raise ValueError("dataset: minimum should be greater than or equal to 2")
+    if range_max > RANGE_MAX:
+        raise ValueError("dataset: range_max should be less than or equal to %d" % RANGE_MAX)
+    if maximum > range_max:
+        raise ValueError("dataset: maximum shoudl be less than or equal to %d" % range_max)
+    int_list = list(range(minimum, maximum + 1))
 
-    with open(DATASETS_DIR + "%d_%d_%d.dataset" % (int(time()), range_max, dataset_size), "w") as f:
-        for n in sam:
-            f.write("%d\t%d\n" % (n, is_prime(n)))
+    shuffle(int_list)
+    
+    with open(DATASETS_DIR + "%d_%d_%d.dataset" % (int(time()), minimum, maximum), "w") as f:
+        for n in int_list:
+            f.write("%d\t%d\n" % (n, trial_division(n)))
 
 

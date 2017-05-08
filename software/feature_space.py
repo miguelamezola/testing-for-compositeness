@@ -16,8 +16,6 @@ def get_prime(partition):
         index = randint(4,len(content))
         line = content[index].strip()
 
-
-
     return line
 
 
