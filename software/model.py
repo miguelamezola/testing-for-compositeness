@@ -4,13 +4,15 @@ from random import randint
 from sklearn.svm import SVC
 from sklearn import preprocessing
 from time import time
+import argparse
+
 
 DATA_DIR = "./data/"
 RESULTS_DIR = "./results/"
 
 def train(max_base, max_C, kernel, max_class_weight):
 
-        seed = int(time())
+	seed = int(time())
 
 	for root, dirs, files in os.walk(DATA_DIR):
 
@@ -100,3 +102,17 @@ def get_space(dataset, base, part=0.7):
 
 
     return {"train.X": X_train, "train.y": y_train, "test.X": X_test, "test.y": y_test}
+
+
+if __name__ == '__main__':
+	parser = argparse.ArgumentParser(description="Support Vector Machine Classifier")
+	parser.add_argument('-b', metavar='max_base', dest='max_base', type=int, nargs='?', help='max base b representation of integers')
+	parser.add_argument('-c', metavar='max_C', dest='max_c', type=int, nargs='?', help='max penalty parameter C of the error term.')
+	parser.add_argument('-k', metavar="kernel", dest="kernel", type=str, nargs='?', help="must be one of ‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ or a callable")
+	parser.add_argument('-w', metavar='max_weight', dest='max_weight', type=int, nargs='?', help='max weight of primes class')
+
+	args = parser.parse_args()
+
+	train(max_base=args.max_base, max_C=args.max_c, kernel=args.kernel, max_class_weight=args.max_weight)
+
+
