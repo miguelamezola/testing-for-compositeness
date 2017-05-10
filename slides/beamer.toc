@@ -1,2 +1,5 @@
-\beamer@subsectionintoc {0}{1}{Miller-Rabin vs Support Vector Machine Classification}{1}{0}{0}
 \beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Introduction}{2}{0}{1}
+\beamer@sectionintoc {2}{Structure of ${\mathbb Z}_p$}{5}{0}{2}
+\beamer@sectionintoc {3}{Miller-Rabin Test}{9}{0}{3}
+\beamer@sectionintoc {4}{Suppose Vector Machine}{17}{0}{4}

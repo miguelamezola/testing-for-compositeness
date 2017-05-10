@@ -1,9 +1,10 @@
-\documentclass[xcolor=table]{beamer}
+\documentclass{beamer}
 \usepackage[utf8]{inputenc}
-\usetheme{Madrid}
-\usecolortheme{beaver}
 
-\setbeamertemplate{navigation symbols}{}
+
+%\setbeamertemplate{headline}{}
+%\setbeamertemplate{navigation symbols}{}
+
 \def\arraystretch{1.5}%  1 is the default, change whatever you need
 \newcommand*{\theorembreak}{\usebeamertemplate{theorem end}\framebreak\usebeamertemplate{theorem begin}}
 
@@ -16,81 +17,86 @@
 \makeatother
 
 %packages to use
-\usepackage{beamerthemesplit}
-\usepackage{verbatim}
-\usepackage{amsmath,amsfonts,amsthm,amssymb}
-\usepackage{setspace}
-\usepackage{fancyhdr}
-\usepackage{extramarks}
-%\usepackage{color}
-\usepackage{graphicx,float, wrapfig}
-\usepackage{epstopdf}
-\usepackage{transparent}
-\usepackage{eso-pic}
-\usepackage{multicol}
-\usepackage{hyperref}
-\usepackage{booktabs}
+%\usepackage{beamerthemesplit}
+%\usepackage{verbatim}
+%\usepackage{amsmath,amsfonts,amsthm,amssymb}
+%\usepackage{setspace}
+%\usepackage{fancyhdr}
+%\usepackage{extramarks}
+%%\usepackage{color}
+%\usepackage{graphicx,float, wrapfig}
+%\usepackage{epstopdf}
+%\usepackage{transparent}
+%\usepackage{eso-pic}
+%\usepackage{multicol}
+%\usepackage{booktabs}
 
-\usepackage{xcolor}
-\usepackage{cleveref}
+%\usepackage{xcolor}
+%\usepackage{cleveref}
+%
+%\everymath={\displaystyle}
 
-\everymath={\displaystyle}
+% For mindmap
+%\usepackage{dtklogos}
+\usepackage{tikz}
+\usetikzlibrary{mindmap,trees}
+
 
 %New commands to simplify typing. You do not need to use them all, or at all.
 \newcommand\Z{{\mathbb Z}}
-\newcommand{\FF}{\mathbb{F}}  \def\QQ{\mathbb{Q}} \def\R{\mathcal{R}} \newcommand{\CC}{\mathbb{C}}  \def\RR{\mathbb{R}}
-\newcommand{\Ss}{\mathbb{S}}
-\def\g{\mathfrak{g}} \def\h{\mathfrak{h}} \def\ad{\mathrm{ad}}
-\def\tr{\mathrm{tr}} \def\dim{\mathrm{dim}} \def\Hom{\mathrm{Hom}}
-\def\End{\mathrm{End}} \def\ZZ{\mathbb{Z}} \def\Aut{\mathrm{Aut}}
- \def\X{\mathfrak{X}} \def\sl{\mathfrak{sl}}\def\H{\mathcal{H}} \def\Ind{\mathrm{Ind}} \def\GL{\mathrm{GL}} \def\ind{\mathrm{ind}}  \def\Res{\mathrm{Res}} \def\dd{\displaystyle} \def\Inf{\mathrm{Inf}} \def\ch{\mathrm{ch}} \def\spanning{\textnormal{-span}}
-\def\vphi{\varphi} \def\U{\mathcal{U}} \def\P{\mathcal{P}}\def\B{\mathcal{B}}
-\def\Irr{\mathrm{Irr}} \def\veps{\varepsilon} \def\wt{\mathrm{wt}}\def\Indf{\mathrm{Indf}}
-\def\Resf{\mathrm{Resf}} \def\L{\mathcal{L}} \def\sh{\mathrm{sh}}\def\hgt{\mathrm{ht}}
-\def\diag{\mathrm{diag}} \def\Card{\mathrm{Card}} \def\scscs{\scriptscriptstyle} \def\scs{\scriptstyle}
-\newcommand{\cT}{\mathcal{T}}\newcommand{\cD}{\mathcal{D}}  \newcommand{\BC}{\mathbf{C}}
-\newcommand{\cN}{\mathcal{N}}
-\newcommand{\cX}{\mathcal{X}}
-\newcommand{\cS}{\mathcal{S}}
-\newcommand{\cB}{\mathcal{B}}
-\newcommand{\cI}{\mathcal{I}}
-\newcommand{\cC}{\mathcal{C}}
-\newcommand{\cK}{\mathcal{K}}
-\newcommand{\cM}{\mathcal{M}}
-\newcommand{\cE}{\mathcal{E}}
-\newcommand{\cQ}{\mathcal{Q}}
-\def\ts{\textstyle}
-\newcommand{\character}{\mathrm{char}}
-\newcommand{\Tr}{\mathrm{Tr}}
-\def\cP{\mathcal{P}}
-\newcommand{\cL}{\mathcal{L}}
-\newcommand{\cR}{\mathcal{R}}
-\newcommand{\cA}{\mathcal{A}}
-\newcommand{\cH}{\mathcal{H}}
-\newcommand{\One}{{1\hspace{-.14cm} 1}}
-\newcommand{\one}{{1\hspace{-.11cm} 1}}
-\newcommand{\entryr}[1]{\sss{\overrightarrow{\underset{\circ}{#1}}}}
-\newcommand{\entryl}[1]{\sss{\underleftarrow{\overset{\circ}{#1}}}}
-\newcommand{\btr}{\mathrm{btr}}
-\newcommand{\Id}{\mathrm{Id}}
-\newcommand{\im}{\mathrm{im}}
-\newcommand{\LL}{\mathrm{LL}}
-\newcommand{\RL}{\mathrm{RL}}
-\newcommand{\Sq}{\mathrm{Sq}}
-\newcommand{\supp}{\mathrm{supp\,}}
-\newcommand{\CKP}{C_{\scscs{\tiny{KP}}}}
-\newcommand{\larc}[1]{\hspace{-.4ex}\overset{#1}{\frown}\hspace{-.4ex}}
-\newcommand{\slarc}[1]{\overset{#1}{\frown}}
-\newcommand{\D}[3]{D^{#1}\left(#2,#3\right)}
-\newcommand{\Da}[3]{\tilde{D}^{#1}\left(#2,#3\right)}
-\newcommand{\hd}[3]{d^{#1}\left(#2,#3\right)}
-\newcommand{\hda}[3]{\tilde{d}^{#1}\left(#2,#3\right)}
-\newcommand{\frexp}[2]{^{\frac{#1}{#2}}}
-\newcommand{\inv}{^{-1}}
-\newcommand{\sleq}{\leqslant}
-\newcommand{\sgeq}{\geqslant}
-\newcommand{\twid}[1]{\widetilde{#1}}
-\newcommand{\meang}{\measuredangle}
+%\newcommand{\FF}{\mathbb{F}}  \def\QQ{\mathbb{Q}} \def\R{\mathcal{R}} \newcommand{\CC}{\mathbb{C}}  \def\RR{\mathbb{R}}
+%\newcommand{\Ss}{\mathbb{S}}
+%\def\g{\mathfrak{g}} \def\h{\mathfrak{h}} \def\ad{\mathrm{ad}}
+%\def\tr{\mathrm{tr}} \def\dim{\mathrm{dim}} \def\Hom{\mathrm{Hom}}
+%\def\End{\mathrm{End}} \def\ZZ{\mathbb{Z}} \def\Aut{\mathrm{Aut}}
+% \def\X{\mathfrak{X}} \def\sl{\mathfrak{sl}}\def\H{\mathcal{H}} \def\Ind{\mathrm{Ind}} \def\GL{\mathrm{GL}} \def\ind{\mathrm{ind}}  \def\Res{\mathrm{Res}} \def\dd{\displaystyle} \def\Inf{\mathrm{Inf}} \def\ch{\mathrm{ch}} \def\spanning{\textnormal{-span}}
+%\def\vphi{\varphi} \def\U{\mathcal{U}} \def\P{\mathcal{P}}\def\B{\mathcal{B}}
+%\def\Irr{\mathrm{Irr}} \def\veps{\varepsilon} \def\wt{\mathrm{wt}}\def\Indf{\mathrm{Indf}}
+%\def\Resf{\mathrm{Resf}} \def\L{\mathcal{L}} \def\sh{\mathrm{sh}}\def\hgt{\mathrm{ht}}
+%\def\diag{\mathrm{diag}} \def\Card{\mathrm{Card}} \def\scscs{\scriptscriptstyle} \def\scs{\scriptstyle}
+%\newcommand{\cT}{\mathcal{T}}\newcommand{\cD}{\mathcal{D}}  \newcommand{\BC}{\mathbf{C}}
+%\newcommand{\cN}{\mathcal{N}}
+%\newcommand{\cX}{\mathcal{X}}
+%\newcommand{\cS}{\mathcal{S}}
+%\newcommand{\cB}{\mathcal{B}}
+%\newcommand{\cI}{\mathcal{I}}
+%\newcommand{\cC}{\mathcal{C}}
+%\newcommand{\cK}{\mathcal{K}}
+%\newcommand{\cM}{\mathcal{M}}
+%\newcommand{\cE}{\mathcal{E}}
+%\newcommand{\cQ}{\mathcal{Q}}
+%\def\ts{\textstyle}
+%\newcommand{\character}{\mathrm{char}}
+%\newcommand{\Tr}{\mathrm{Tr}}
+%\def\cP{\mathcal{P}}
+%\newcommand{\cL}{\mathcal{L}}
+%\newcommand{\cR}{\mathcal{R}}
+%\newcommand{\cA}{\mathcal{A}}
+%\newcommand{\cH}{\mathcal{H}}
+%\newcommand{\One}{{1\hspace{-.14cm} 1}}
+%\newcommand{\one}{{1\hspace{-.11cm} 1}}
+%\newcommand{\entryr}[1]{\sss{\overrightarrow{\underset{\circ}{#1}}}}
+%\newcommand{\entryl}[1]{\sss{\underleftarrow{\overset{\circ}{#1}}}}
+%\newcommand{\btr}{\mathrm{btr}}
+%\newcommand{\Id}{\mathrm{Id}}
+%\newcommand{\im}{\mathrm{im}}
+%\newcommand{\LL}{\mathrm{LL}}
+%\newcommand{\RL}{\mathrm{RL}}
+%\newcommand{\Sq}{\mathrm{Sq}}
+%\newcommand{\supp}{\mathrm{supp\,}}
+%\newcommand{\CKP}{C_{\scscs{\tiny{KP}}}}
+%\newcommand{\larc}[1]{\hspace{-.4ex}\overset{#1}{\frown}\hspace{-.4ex}}
+%\newcommand{\slarc}[1]{\overset{#1}{\frown}}
+%\newcommand{\D}[3]{D^{#1}\left(#2,#3\right)}
+%\newcommand{\Da}[3]{\tilde{D}^{#1}\left(#2,#3\right)}
+%\newcommand{\hd}[3]{d^{#1}\left(#2,#3\right)}
+%\newcommand{\hda}[3]{\tilde{d}^{#1}\left(#2,#3\right)}
+%\newcommand{\frexp}[2]{^{\frac{#1}{#2}}}
+%\newcommand{\inv}{^{-1}}
+%\newcommand{\sleq}{\leqslant}
+%\newcommand{\sgeq}{\geqslant}
+%\newcommand{\twid}[1]{\widetilde{#1}}
+%\newcommand{\meang}{\measuredangle}
 
 
 %%%%%%%%%%%%%%%%%%%
@@ -107,11 +113,23 @@
 \newtheorem{exmp}[thm]{Example}
 
 % Information included in title page:
+\usetheme{JuanLesPins}
+\usecolortheme{beaver}
 \title{Testing for Compositeness}
-\subsection{Miller-Rabin vs Support Vector Machine Classification}
+\subtitle{Miller-Rabin vs Support Vector Machine Classification}
 \author{Miguel Amezola}
 \institute{Department of Mathematics\\ Pacific Lutheran University}
 \date{\today}
+\logo{\includegraphics[height=0.5cm]{logo}}
+
+
+\AtBeginSection[]
+{
+	\begin{frame}
+		\frametitle{Overview}
+		\tableofcontents[currentsection]
+	\end{frame}
+}
 
 \begin{document}
 
@@ -120,13 +138,8 @@
 \titlepage
 \end{frame}
 
-% Table of contents
-\begin{frame}
-	\frametitle{Overview}
-	\tableofcontents
-\end{frame}
 
-
+\section{Introduction}
 \begin{frame}
 	\frametitle{Prime and Composite Numbers}
 	
@@ -139,68 +152,81 @@
 	\end{definition}		
 \end{frame}
 
-\begin{frame}
-	\frametitle{Divisibility}	
-	
-	\begin{definition}[Divide \cite{pommersheim}]\label{definition:divide}
-		Let $a,d \in \Z$. We say that $d$ divides $a$ if there exists $q \in \Z$ such that $a = qd$. We express this in symbols as $d \mid a$ (which is read ``$d$ divides $a$").
-	\end{definition}
-%	
-%	\begin{prop}[Linear combination]\label{proposition:linear_combination}
-%		Let $d,m,n,x,y \in \Z$. If $d \mid x$ and $d \mid y$, then $d \mid mx + ny$.
-%	\end{prop}
-%	
-%	\begin{proof}
-%		Let $d,m,n,x,y \in \Z$ such that $d \mid x$ and $d \mid y$.
-%		Since $d \mid x$, then there exists $k \in \Z$ such that $x = kd$.
-%		Multiplying by $m$, we have  $mx = mkd$.
-%		Since $d \mid y$, then there exists $l \in \Z$ such that $y = ld$.
-%		Multiplying by $n$, we have  $ny = nld$.
-%		Adding both results yields $$ mx + ny = mkd + nld = (mk+nl)d.$$
-%		Therefore, since $(mk+nl) \in \Z$, we know $d \mid mx + ny$.
-%	\end{proof}
 
+\begin{frame}
+	\begin{center}
+
+		\resizebox{!}{0.98\textheight}{%
+	
+			\begin{tikzpicture}
+			\path[mindmap,concept color=black,text=white]
+			node[concept] {Background for Miller-Rabin Test}
+			[clockwise from=0]
+			child[concept color=green!50!black] {
+				node[concept] {Divisibility}
+				[clockwise from=45]
+				child { node[concept] {GCD} }
+				child { node[concept] {Linear Combinations} }
+			}
+			child[concept color=blue] {
+				node[concept](congruence) {Congruence}
+				[clockwise from=30]
+				child { node[concept] {Equivalent Conditions}
+					[clockwise from=10]
+					child { node[concept] {$\exists k \in \Z : a=b+ kn$} }
+					child { node[concept] {$n \mid a - b$} }
+					child { node[concept] {$a \equiv b \pmod n$} }
+					}
+				child { node[concept](classes) {Classes} 
+					[clockwise from=-90]
+					child { node[concept] {$\bar{a} = \{ x \in \Z : x \equiv a \pmod n \}$} }
+					}
+				child { node[concept] {Equality}
+					[clockwise from=180]
+					child { node[concept] {$\bar{a} = \bar{b}$ iff $a \equiv b \pmod n$} } 
+				}		
+			}
+			child[concept color=orange] { node[concept] {Structure}
+				[clockwise from=-90]
+				child { node[concept] {Monoid} 
+					child[grow=-45] { node[concept] {Set} }
+					child[grow=-90] { node[concept] {Associative Binary Operation} }
+					child[grow=-135] { node[concept] {Identity Element} }
+					}
+				child { node[concept] {Abelian Group} 
+					child[grow=-110] { node[concept] {Monoid} }
+					child[grow=-155] { node[concept] {Inverse} }
+					child[grow=-200] { node[concept] {Commutative Operation} }
+					}
+				child { node[concept] {Ring}
+					[clockwise from=-180]
+					child[grow=190] { node[concept] {Disribution} }
+					child[grow=140] { node[concept] {Abelian Group Under Addition} }
+					child[grow=90] { node[concept] {Monoid Under Multiplication} }
+					}				
+			};
+%			\node [annotation,right] at (classes.south)
+%			{The root concept is, in general, the most important concept.};
+			\end{tikzpicture}
+		}
+	\end{center}
+			
 \end{frame}
 
-\begin{frame}[allowframebreaks]
-	\frametitle{The Set of All Congruence Classes}
+\section{Structure of $\Z_p$}
+\begin{frame}
+	\frametitle{Congruence Example}
 
-	\begin{definition}[Congruent \cite{pommersheim}]\label{definition:congruent}
-		Let $a,b,n \in \Z$ with $n > 0$. We say that $a$ is congruent to $b$ modulo $n$ if $n \mid (a - b)$, denoted $a \equiv b \pmod n$. 
+	\begin{definition}[Congruent]\label{definition:congruent}
+		Let $a,b,n \in \Z$ with $n > 0$. We say that $a$ is congruent to $b$ modulo $n$ if $n \mid (a - b)$, denoted $a \equiv b \pmod n$. \cite{pommersheim}
 	\end{definition}
 	
 	\begin{example}\label{example:congruent}
 		Is it true that 34 is congruent to 144 modulo $10$? Subtracting 144 from 34, we have $34 - 144 = -110$. Now, does $10$ divide this difference? Yes, since $-110 = -11 \cdot 10$. Thus, $34 \equiv 144 \pmod{10}$.
 	\end{example}
-	
-	
-%	\begin{prop}\label{proposition:equivalent_conditions_for_congruent}
-%		Let $a, b, n \in \Z$. Then the following conditions are all equivalent.
-%		\begin{enumerate}
-%			\item $a = b + kn$ for some $k \in \Z$;
-%			\item $n \mid a - b$;
-%			\item $a \equiv b \pmod n$.
-%		\end{enumerate}		
-%	\end{prop}
-%	
-%	\begin{proof}
-%		Let $a, b, n \in \Z$.
-%		First suppose condition (1).
-%		Then $a = b + kn$ implies $a-b = kn$.
-%		By the definition of divide, it follows that $n \mid a - b$.
-%		Thus, condition (1) implies condition (2).
-%		
-%		Now suppose condition (2).
-%		Then, by the definition of congruent, $n \mid a - b$ implies $a \equiv b \pmod n$.
-%		Therefore, condition (2) implies condition (3).
-%		
-%		Finally, we would like to show that condition (3) implies condition (1).
-%		So, we assume $a \equiv b \pmod n$.
-%		Then, by the definition of congruent, we know $n \mid a - b$.
-%		If follows that there exists $k \in \Z$ such that $a-b = kn$ by the definition of divide.
-%		Therefore, condition (3) implies condition (1).	
-%	\end{proof}
-%	
+\end{frame}	
+\begin{frame}
+	\frametitle{The Set of All Congruence Classes}
 	\begin{definition}[Congruence Class]\label{definition:congruence_class}
 		%		Let $n \in \N$, and let $b \in \Z$. Then the \textbf{congruence class} of $b$ modulo $n$ is the set of all integers congruent to $b$ modulo $n$: $$ \bar{b} := \{ x \in \Z : x \equiv b \pmod n \}. $$ The congruence class of $b$ modulo $n$ may also be defined as $$ \bar{b} := \{ b + kn : k \in \Z \}. $$
 		Let $a,n \in \Z$ with $n > 0$. We define the congruence class of $a$ modulo $n$ as the set of all integers congruent to $a$ modulo $n$; that is, $$\bar{a} := \{ x \in \Z : x \equiv a \pmod n \}.$$% $$ \bar{a} := \{ a + kn : k \in \Z \}.$$
@@ -209,115 +235,11 @@
 	\begin{definition}[$\Z_n$]\label{Definition: Zn}
 		Let $n > 0$ be any integer. We define $\Z_n$ to be the set of all congruence classes modulo $n$, i.e. $$ \Z_n := \{ \bar{0}, \bar{1}, \bar{2}, \ldots, \overline{n - 1} \}.$$
 	\end{definition}
-%	
-%	\begin{prop}[$\Z_n \neq \emptyset$]\label{proposition:Zn_is_nonempty}
-%		Let $n > 0$ be any integer. Then $\Z_n \neq \emptyset$.
-%	\end{prop}
-%	
-%	\begin{proof}
-%		Let $n > 0$ be any integer.
-%		Then for $k=1 \in \Z$, $n = 0 + kn$ implies $n \equiv 0 \pmod n$ by \cref{proposition:equivalent_conditions_for_congruent}.
-%		By the definition of congruence classes, it follows that $n \equiv 0 \pmod n$ is a member of $\bar{0} \in \Z_n$.
-%		Therefore, $\Z_n \neq \emptyset$.
-%	\end{proof}
-%	
-%	\begin{prop}\label{proposition:equal_congruence_classes}
-%		Let $\bar{a}, \bar{b} \in \Z_n$.
-%		Then $\bar{a} = \bar{b}$ if and only if $a \equiv b \pmod n$.
-%	\end{prop}	
-%	
-%	\begin{proof}
-%		Let $\bar{a}, \bar{b} \in \Z_n$. First, we would like to show that if $\bar{a} = \bar{b}$, then $a \equiv b \pmod n$.
-%		Suppose $\bar{a} = \bar{b}$, and let $x \in \bar{a}$.
-%		Thus, $x = a + kn$ for some $k \in \Z$ by the definition of congruence classes.
-%		Since $\bar{a}$ and $\bar{b}$ are equal sets, then it must be that $x \in \bar{b}$, and so $x = b + ln$ for some $l \in \Z$.
-%		Then
-%		\begin{align*}
-%		a+kn &= b+ln \\
-%		a-b &= ln-kn \\
-%		a-b &= (l-k)n.
-%		\end{align*}
-%		Since $l-k$ is an integer, we conclude that $n \mid a-b$.
-%		Thus, by the definition of congruent, $a \equiv b \pmod n$.
-%		
-%		Conversely, suppose $a \equiv b \pmod n$.
-%		Then $n \mid a - b$, which means that $a-b = mn$ for some $m\in \Z$.
-%		Since $m$ is an integer, it can be written as the sum of two integers, $p$ and $q$.
-%		Hence,
-%		\begin{align*}
-%		a-b &= mn \\
-%		a-b &= (p+q)n \\
-%		a-b &= pn+qn \\
-%		a-pn &= b + qn \\
-%		a + (-p)n &= b + qn
-%		\end{align*}
-%		Since the left-hand side of this equality is an arbitrary element of $\bar{a}$ and the right-hand side is an arbitrary element of $\bar{b}$, we conclude that these congruence classes must be equal.
-%		Therefore, $\bar{a} = \bar{b}$.
-%	\end{proof}
-%	
-%	
-%	We now define two basic operations $\Z_n$: addition and multiplication.
-%	
-%	\begin{definition}[Addition on $\Z_n$]\label{definition:addition on Zn}
-%		Let $\bar{a}, \bar{b} \in \Z_n$.
-%		Then addition on $\Z_n$ is the function $f: \Z_n \times \Z_n \to \Z_n$ defined by $$f[(\bar{a}, \bar{b})] := \overline{a + b},$$
-%		and denoted $$ \bar{a} + \bar{b} := \overline{a + b}.$$
-%		We refer to this addition as addition on $\Z_n$ or addition modulo $n$.
-%	\end{definition}
-%	
-%	\begin{definition}[Multiplication on $\Z_n$]\label{definition:multiplication on Zn}
-%		Let $\bar{a}, \bar{b} \in \Z_n$.
-%		Then multiplication on $\Z_n$ is the function $f: \Z_n \times \Z_n \to \Z_n$ defined by $$f[(\bar{a}, \bar{b})] := \overline{a \cdot b},$$
-%		and denoted $$ \bar{a} \cdot \bar{b} := \overline{a \cdot b}.$$
-%		We refer to this multiplication as multiplication on $\Z_n$ or multiplication modulo $n$, and use the abbreviation $ab$ for $a \cdot b$.
-%	\end{definition}
-%	
-\end{frame}
 
-\begin{frame}[allowframebreaks]
-	\frametitle{Algebraic Structures}
-	
-	\begin{definition}[Binary operation]\label{definition:bianry operation}
-		Let $S$ be a set. We define a binary operation on $S$ to be a function $f:S \times S \to S$ that assigns to each pair $(a,b) \in S \times S$ a unique element $a \circ b \in S$.
-		
-		A binary operation $\circ$ with the property that $(a \circ b) \circ c = a \circ (b \circ c)$ for all $a, b, c \in S$ is called associative.
-	\end{definition}
-	% \usepackage{booktabs}
-	% \usepackage[table,xcdraw]{xcolor}
-	% If you use beamer only pass "xcolor=table" option, i.e. \documentclass[xcolor=table]{beamer}
-	\begin{table}[]
-		\centering
-		%\caption{My caption}
-		\label{my-label}
-		\begin{tabular}{@{}cccccc@{}}
-			\toprule
-			& \textbf{Associative}           & \textbf{Identity}                & \textbf{Inverses}                & \textbf{Commutative}           \\ \midrule
-			\textbf{Magma}                                              & \cellcolor[HTML]{FFCCC9}Unneeded & \cellcolor[HTML]{FFCCC9}Unneeded & \cellcolor[HTML]{FFCCC9}Unneeded & \cellcolor[HTML]{FFCCC9}Unneeded \\
-			\textbf{Semigroup}                                          & \cellcolor[HTML]{9AFF99}Required & \cellcolor[HTML]{FFCCC9}Unneeded & \cellcolor[HTML]{FFCCC9}Unneeded & \cellcolor[HTML]{FFCCC9}Unneeded \\
-			\textbf{Monoid}                                             & \cellcolor[HTML]{9AFF99}Required & \cellcolor[HTML]{9AFF99}Required & \cellcolor[HTML]{FFCCC9}Unneeded & \cellcolor[HTML]{FFCCC9}Unneeded \\
-			\textbf{Group}                                              & \cellcolor[HTML]{9AFF99}Required & \cellcolor[HTML]{9AFF99}Required & \cellcolor[HTML]{9AFF99}Required & \cellcolor[HTML]{FFCCC9}Unneeded \\
-			\textbf{Abelian Group}                                      & \cellcolor[HTML]{9AFF99}Required & \cellcolor[HTML]{9AFF99}Required & \cellcolor[HTML]{9AFF99}Required & \cellcolor[HTML]{9AFF99}Required \\ \bottomrule
-		\end{tabular}
-	\end{table}
-	
-	
-	\begin{definition}[Ring]\label{definition:ring}
-		Let $R$ be an abelian group.
-		Then $R$ is a ring if it satisfies the following axioms:
-		\begin{enumerate}
-			\item $R$ forms a monoid under a second binary operation $\circ$ that distributes over the group operation, and 
-			\item the additive identity $0 \in R$ satisfies $0 \circ a = 0$ for all $a \in R$.
-		\end{enumerate}
-	\end{definition}
-		
-	\begin{definition}[Field]\label{definition:field}
-		Let $F$ be a ring under two commutative binary operations.
-		If every nonzero element in $R$ has a multiplicative inverse, then we say $F$ is a field.
-	\end{definition}
 \end{frame}
 
 
-\begin{frame}[allowframebreaks]
+\begin{frame}
 	\frametitle{The Structure of $\Z_n$}	
 	
 	\begin{table}[h!]
@@ -359,14 +281,7 @@
 	\end{table}	
 \end{frame}
 
-%\begin{frame}
-%	\frametitle{Zero Product Property}
-%	
-%	\begin{cor}[Zero product property]\label{corollary:zero_product_property}
-%		Let $p$ be prime. If $\bar{a} \cdot \bar{b} = \bar{0}$, then either $\bar{a} = \bar{0}$ or $\bar{b} = \bar{0}$ for all $\bar{a}, \bar{b} \in \Z_p$.
-%	\end{cor}	
-%\end{frame}
-
+\section{Miller-Rabin Test}
 \begin{frame}[allowframebreaks]
 	\frametitle{Fermat's Little Theorem}
 	
@@ -408,7 +323,7 @@
 		
 \end{frame}
 
-\begin{frame}[allowframebreaks]
+\begin{frame}
 	\frametitle{Miller-Rabin Test for Compositeness}
 
 	\begin{algorithm}[Miller-Rabin Test for Compositeness]\label{algorithm:miller-rabin}
@@ -421,10 +336,10 @@
 		In this case, the integer $a$ is called a Miller-Rabin witness to the compositeness of $n$.
 	\end{algorithm}
 	
-%\end{frame}
+\end{frame}
 
-%\begin{frame}[allowframebreaks]
-%	\frametitle{Miller-Rabin Test for Compositeness}
+\begin{frame}[allowframebreaks]
+	\frametitle{Miller-Rabin Test Example}
 	
 	\begin{example}
 		We would like to test the compositeness of 169. Since $2^3$ is the largest power of two that divides 168, we must find an $\bar{a}\in \Z_{169}$ such that $\bar{a}^{\frac{168}{2^3}} \neq \bar{1}$ and $\bar{a}^{\frac{168}{2^h}} \neq -\bar{1}$ for all $h$, $h=1,2,3$. So, we randomly choose $\overline{19} \in \Z_{169}$ and find that
@@ -449,17 +364,34 @@
 	\frametitle{Effectiveness of the Miller-Rabin Test}
 \end{frame}
 
+%\begin{frame}
+%	\frametitle{Machine Learning Algorithms}
+%	
+%	\begin{itemize}
+%		\item Target function --- underlying function that maps inputs to outputs (if it exists)
+%		\item Solution --- estimate of the target function by learning algorithm (also called the decision function in classification algorithms)
+%		\item Hypothesis space --- a set or class of candidate solutions (known as hypotheses)
+%		\item Learning algorithm --- uses training data to select a hypothesis 
+%		\item Features --- the quantities used to describe the data
+%		\item Attributes --- original quantities from data
+%	\end{itemize}
+%	
+%\end{frame}
+
+\section{Suppose Vector Machine}
+
 \begin{frame}
-	\frametitle{Machine Learning Algorithms}
-	
+	\frametitle{What is a Support Vector Machine (SVM)?}
 	\begin{itemize}
-		\item Target function --- underlying function that maps inputs to outputs (if it exists)
-		\item Solution --- estimate of the target function by learning algorithm (also called the decision function in classification algorithms)
-		\item Hypothesis space --- a set or class of candidate solutions (known as hypotheses)
-		\item Learning algorithm --- uses training data to select a hypothesis 
-		\item Features --- the quantities used to describe the data
-		\item Attributes --- original quantities from data
+		\item Use non-linear function $K$ to map input vector to a higher dimensional feature space 
+		
+		\item Linear decision function with maximal margin between vectors of different classes
+	
 	\end{itemize}
+	
+	\begin{center}
+		\includegraphics[width=\textwidth]{svm_graph}
+	\end{center}
 	
 \end{frame}
 
@@ -491,8 +423,10 @@
 	\frametitle{Comparison}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[allowframebreaks]
 	\frametitle{References}
+	\bibliographystyle{amsalpha}
+	\bibliography{../report/refs.bib}	
 \end{frame}
 
 \begin{frame}
