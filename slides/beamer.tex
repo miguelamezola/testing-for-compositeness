@@ -1,6 +1,7 @@
 \documentclass{beamer}
 \usepackage[utf8]{inputenc}
-
+\usepackage{xcolor,colortbl}
+\usepackage{seqsplit}
 
 %\setbeamertemplate{headline}{}
 %\setbeamertemplate{navigation symbols}{}
@@ -141,22 +142,48 @@
 
 \section{Introduction}
 \begin{frame}
-	\frametitle{Prime and Composite Numbers}
-	
-	\begin{definition}[Prime]\label{definition:prime}
-		Let $p \in \Z$, $p > 1$. Then $p$ is prime if and only if for every $a, b \in \Z$, $p=ab$ implies $a=1$ or $b=1$. \cite{pommersheim}
-	\end{definition}
-	
-	\begin{definition}[Composite]\label{definition:composite}
-		Let $n \in \Z, n > 1$. Then $n$ is composite if and only if there exists $a, b \in \Z$ such that $n=ab, 1<a,b<n$. \cite{pommersheim}
-	\end{definition}		
+	\begin{tabular}{cl}  
+		\begin{tabular}{c}
+			\includegraphics[height=5cm, width=3.5cm]{gauss}
+		\end{tabular}
+		& \begin{tabular}{l}
+			\parbox{0.5\linewidth}{%  change the parbox width as appropiate
+				``The problem of distinguishing prime numbers from composite numbers \ldots is known to be one of the most important and useful in arithmetic. \ldots Further, the dignity of the science itself seems to require that every possible means be explored for the solution of a problem so elegant and so celebrated." --- \textit{Disquisitiones Arithmeticae (1801): Article 329} 
+			}
+		\end{tabular}  \\
+	\end{tabular}	
 \end{frame}
 
 
 \begin{frame}
+	\frametitle{Binary Classification}
+	
+	\begin{definition}[Prime]\label{definition:prime}
+		Let $p \in \Z$ with $p > 1$. If $p=ab$ implies $a=1$ or $b=1$ for all $a, b \in \Z$, then $p$ is prime. \cite{pommersheim}
+	\end{definition}
+			
+	\begin{definition}[Composite]\label{definition:composite}
+		Let $n \in \Z$ with $ n > 1$. If there exists $a, b \in \Z$ such that $n=ab$ with $1<a,b<n$, then $n$ is composite. \cite{pommersheim}
+	\end{definition}		
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Primality Testing}
+%\end{frame}
+
+\tikzset{
+ 	invisible/.style={opacity=0},
+ 	visible on/.style={alt={#1{}{invisible}}},
+ 	alt/.code args={<#1>#2#3}{%
+ 		\alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+ 	},
+}
+
+\begin{frame}
 	\begin{center}
 
-		\resizebox{!}{0.98\textheight}{%
+		\resizebox{!}{0.9\textheight}{%
+			
 	
 			\begin{tikzpicture}
 			\path[mindmap,concept color=black,text=white]
@@ -164,56 +191,37 @@
 			[clockwise from=0]
 			child[concept color=green!50!black] {
 				node[concept] {Divisibility}
-				[clockwise from=45]
-				child { node[concept] {GCD} }
-				child { node[concept] {Linear Combinations} }
+				[clockwise from=0]
+				child[visible on=<2->] { node[concept] {GCD} }
+				child[visible on=<3->] { node[concept] {Linear Combinations} }
 			}
-			child[concept color=blue] {
-				node[concept](congruence) {Congruence}
-				[clockwise from=30]
-				child { node[concept] {Equivalent Conditions}
-					[clockwise from=10]
-					child { node[concept] {$\exists k \in \Z : a=b+ kn$} }
-					child { node[concept] {$n \mid a - b$} }
-					child { node[concept] {$a \equiv b \pmod n$} }
-					}
-				child { node[concept](classes) {Classes} 
-					[clockwise from=-90]
-					child { node[concept] {$\bar{a} = \{ x \in \Z : x \equiv a \pmod n \}$} }
-					}
-				child { node[concept] {Equality}
-					[clockwise from=180]
-					child { node[concept] {$\bar{a} = \bar{b}$ iff $a \equiv b \pmod n$} } 
-				}		
-			}
-			child[concept color=orange] { node[concept] {Structure}
+			child[concept color=blue] { node[concept](congruence) {Congruence Classes} }
+			child[concept color=orange] { node[concept] {Algebraic Structures}
 				[clockwise from=-90]
-				child { node[concept] {Monoid} 
+				child[visible on=<4->] { node[concept] {Monoid} 
 					child[grow=-45] { node[concept] {Set} }
 					child[grow=-90] { node[concept] {Associative Binary Operation} }
-					child[grow=-135] { node[concept] {Identity Element} }
+					child[grow=-135, visible on=<5->] { node[concept] {Identity Element} }
 					}
-				child { node[concept] {Abelian Group} 
+				child[visible on=<6->] { node[concept] {Abelian Group} 
 					child[grow=-110] { node[concept] {Monoid} }
-					child[grow=-155] { node[concept] {Inverse} }
-					child[grow=-200] { node[concept] {Commutative Operation} }
+					child[grow=-155] { node[concept] {Inverses} }
+					child[grow=-200, visible on=<7->]{ node[concept] {Commu-tative Operation} }
 					}
-				child { node[concept] {Ring}
+				child[visible on=<8->] { node[concept] {Ring}
 					[clockwise from=-180]
-					child[grow=190] { node[concept] {Disribution} }
-					child[grow=140] { node[concept] {Abelian Group Under Addition} }
-					child[grow=90] { node[concept] {Monoid Under Multiplication} }
+					child[grow=190] { node[concept] {Abelian Group Under Addition} }
+					child[grow=140] { node[concept] {Monoid Under Multiplication} }
+					child[grow=90, visible on=<9->] { node[concept] {Disribution} }
 					}				
 			};
-%			\node [annotation,right] at (classes.south)
-%			{The root concept is, in general, the most important concept.};
 			\end{tikzpicture}
 		}
 	\end{center}
-			
+
 \end{frame}
 
-\section{Structure of $\Z_p$}
+\section{Structure of $\Z_n$}
 \begin{frame}
 	\frametitle{Congruence Example}
 
@@ -222,9 +230,18 @@
 	\end{definition}
 	
 	\begin{example}\label{example:congruent}
-		Is it true that 34 is congruent to 144 modulo $10$? Subtracting 144 from 34, we have $34 - 144 = -110$. Now, does $10$ divide this difference? Yes, since $-110 = -11 \cdot 10$. Thus, $34 \equiv 144 \pmod{10}$.
+		Is 34 congruent to 4 modulo 10?\pause
+		
+		Subtracting 4 from 34, we have $34 - 4 = 30$.\pause
+		
+		Does $10$ divide this difference?\pause 
+		
+		Yes, since $30 = 3 \cdot 10$.\pause
+		
+		Thus, $34 \equiv 4 \pmod{10}$.
 	\end{example}
 \end{frame}	
+
 \begin{frame}
 	\frametitle{The Set of All Congruence Classes}
 	\begin{definition}[Congruence Class]\label{definition:congruence_class}
@@ -238,9 +255,199 @@
 
 \end{frame}
 
+\begin{frame}
+	\frametitle{$\Z_n$ Is a Monoid under Multiplication}
+	\begin{center}
+		\resizebox{!}{0.85\textheight}{%		
+			\begin{tikzpicture}
+			\path[mindmap,concept color=black,text=white]
+			node[concept] {Background for Miller-Rabin Test}
+			[clockwise from=0]
+			child[concept color=gray!50] {
+				node[concept] {Divisibility}
+				[clockwise from=0]
+				child { node[concept] {GCD} }
+				child { node[concept] {Linear Combinations} }
+			}
+			child[concept color=blue] { node[concept](congruence) {Congruence Classes} }
+			child[concept color=orange] { node[concept] {Algebraic Structures}
+				[clockwise from=-90]
+				child { node[concept] (monoid) {Monoid} 
+					child[grow=-45] { node[concept] {Set} }
+					child[grow=-90] { node[concept] {Associative Binary Operation} }
+					child[grow=-135] { node[concept] {Identity Element} }
+				}
+				child[concept color=gray!50] { node[concept] {Abelian Group} 
+					child[grow=-110] { node[concept] {Monoid} }
+					child[grow=-155] { node[concept] {Inverses} }
+					child[grow=-200]{ node[concept] {Commu-tative Operation} }
+				}
+				child[concept color=gray!50] { node[concept] {Ring}
+					[clockwise from=-180]
+					child[grow=190] { node[concept] {Abelian Group Under Addition} }
+					child[grow=140] { node[concept] {Monoid Under Multiplication} }
+					child[grow=90] { node[concept] {Disribution} }
+				}				
+			};
+
+			\draw [concept connection] (congruence) edge (monoid);
+
+			\end{tikzpicture}
+		}
+	\end{center}
+\end{frame}
 
 \begin{frame}
-	\frametitle{The Structure of $\Z_n$}	
+	\frametitle{$\Z_n$ Is a Monoid under Multiplication}
+	
+	\begin{itemize}
+		\item $ \bar{a} \cdot \bar{b} := \overline{a \cdot b}.$\pause
+		\item By the associativity of integer multiplication, we have 
+		\begin{align*}
+		(\bar{a} \cdot \bar{b}) \cdot \bar{c} 
+		&= \overline{a \cdot b} \cdot \bar{c} \\
+		&= \overline{(a \cdot b) \cdot c} \\
+		&= \overline{a \cdot (b \cdot c)} \\
+		&= \bar{a} \cdot \overline{b \cdot c} \\
+		&= \bar{a} \cdot (\bar{b} \cdot \bar{c}).
+		\end{align*}\pause
+		\item Since $(n+1) = 1 + kn$ for $k=1 \in \Z$, we know $(n+1) \equiv 1 \pmod n$, which is en element in $\bar{1} \in \Z_n$.
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{$\Z_n$ Is an Abelian Group under Addition}
+
+	\begin{center}
+		\resizebox{!}{0.85\textheight}{%		
+			\begin{tikzpicture}
+			\path[mindmap,concept color=black,text=white]
+			node[concept] {Background for Miller-Rabin Test}
+			[clockwise from=0]
+			child[concept color=gray!50] {
+				node[concept] {Divisibility}
+				[clockwise from=0]
+				child { node[concept] {GCD} }
+				child { node[concept] {Linear Combinations} }
+			}
+			child[concept color=blue] { node[concept](congruence) {Congruence Classes} }
+			child[concept color=orange] { node[concept] {Algebraic Structures}
+				[clockwise from=-90]
+				child[concept color=gray!50] { node[concept] {Monoid} 
+					child[grow=-45] { node[concept] {Set} }
+					child[grow=-90] { node[concept] {Associative Binary Operation} }
+					child[grow=-135] { node[concept] {Identity Element} }
+				}
+				child { node[concept](group) {Abelian Group} 
+					child[grow=-110] { node[concept] {Monoid} }
+					child[grow=-155] { node[concept] {Inverses} }
+					child[grow=-200]{ node[concept] {Commu-tative Operation} }
+				}
+				child[concept color=gray!50] { node[concept] {Ring}
+					[clockwise from=-180]
+					child[grow=190] { node[concept] {Abelian Group Under Addition} }
+					child[grow=140] { node[concept] {Monoid Under Multiplication} }
+					child[grow=90] { node[concept] {Disribution} }
+				}				
+			};
+			\draw [concept connection] (congruence) edge (group);						
+			\end{tikzpicture}
+		}
+	\end{center}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{$\Z_n$ Is an Abelian Group under Addition}
+	\begin{itemize}
+		\item $ \bar{a} + \bar{b} := \overline{a + b}$\pause
+		\item By the associativity of addition on the integers, we have 
+		\begin{align*}
+		(\bar{a} + \bar{b}) + \bar{c} = \overline{a + b}  + \bar{c} 
+		&= \overline{(a + b) + c} = \overline{a + (b + c)} \\
+		&= \bar{a} + \overline{b + c} = \bar{a} + (\bar{b} + \bar{c})
+		\end{align*}\pause
+		\item Inverses
+		\begin{align*}
+		\bar{a} + \overline{n-a} 
+		= \overline{a + n - a}
+		&= \bar{n} \\
+		&= \overline{n + (-a) + a}
+		= \overline{n-a} + \bar{a}
+		\end{align*}\pause
+		\item $\bar{a}+\bar{b} = \overline{a + b} = \overline{b + a} = \bar{b} + \bar{a}$
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Multiplication Distributes over Addition}
+
+	\begin{itemize}
+		\item Left Distribution
+		\begin{align*}
+		\bar{a} \cdot (\bar{b}+\bar{c}) 
+		= \bar{a} \cdot \overline{b+c}
+		= \overline{a (b+c)}
+		&= \overline{a \cdot b+ac} \\
+		&= \overline{a \cdot b} + \overline{a \cdot c} \\
+		&= \bar{a} \cdot \bar{b} + \bar{a} \cdot \bar{c}
+		\end{align*}\pause
+		
+		\item Right Distribution
+		\begin{align*}
+		(\bar{a}+\bar{b}) \cdot \bar{c} 
+		= \overline{a + b} \cdot \bar{c} 
+		= \overline{(a + b)c} 
+		&= \overline{a \cdot c + b \cdot c} \\
+		&= \overline{a \cdot c} + \overline{b \cdot c} \\
+		&= \bar{a} \cdot \bar{c} + \bar{b} \cdot \bar{c}
+		\end{align*}	
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$\Z_n$ Is a Ring}
+	\begin{center}
+		\resizebox{!}{0.85\textheight}{%		
+			\begin{tikzpicture}
+			\path[mindmap,concept color=black,text=white]
+			node[concept] {Background for Miller-Rabin Test}
+			[clockwise from=0]
+			child[concept color=gray!50] {
+				node[concept] {Divisibility}
+				[clockwise from=0]
+				child { node[concept] {GCD} }
+				child { node[concept] {Linear Combinations} }
+			}
+			child[concept color=blue] { node[concept](congruence) {Congruence Classes} }
+			child[concept color=orange] { node[concept] {Algebraic Structures}
+				[clockwise from=-90]
+				child[concept color=gray!50] { node[concept] {Monoid} 
+					child[grow=-45] { node[concept] {Set} }
+					child[grow=-90] { node[concept] {Associative Binary Operation} }
+					child[grow=-135] { node[concept] {Identity Element} }
+				}
+				child[concept color=gray!50] { node[concept] {Abelian Group} 
+					child[grow=-110] { node[concept] {Monoid} }
+					child[grow=-155] { node[concept] {Inverses} }
+					child[grow=-200]{ node[concept] {Commu-tative Operation} }
+				}
+				child { node[concept](ring) {Ring}
+					[clockwise from=-180]
+					child[grow=190] { node[concept] {Abelian Group Under Addition} }
+					child[grow=140] { node[concept] {Monoid Under Multiplication} }
+					child[grow=90] { node[concept] {Disribution} }
+				}				
+			};
+			\draw [concept connection] (congruence) edge (ring);						
+			\end{tikzpicture}
+		}
+	\end{center}	
+\end{frame}
+
+\begin{frame}
+	\frametitle{$\Z_p$: When $n$ Is Prime}	
 	
 	\begin{table}[h!]
 		\centering
@@ -252,12 +459,17 @@
 				\hline
 				$\cdot$		& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ & $\bar{6}$ \\ \hline
 				$\bar{0}$	& $\bar{0}$ & $\bar{0}$ & $\bar{0}$ & $\bar{0}$ & $\bar{0}$ & $\bar{0}$ & $\bar{0}$ \\ \hline
-				$\bar{1}$	& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ & $\bar{6}$ \\ \hline
-				$\bar{2}$	& $\bar{0}$ & $\bar{2}$ & $\bar{4}$ & $\bar{6}$ & $\bar{1}$ & $\bar{3}$ & $\bar{5}$ \\ \hline
-				$\bar{3}$	& $\bar{0}$ & $\bar{3}$ & $\bar{6}$ & $\bar{2}$ & $\bar{5}$ & $\bar{1}$ & $\bar{4}$ \\ \hline
-				$\bar{4}$	& $\bar{0}$ & $\bar{4}$ & $\bar{1}$ & $\bar{5}$ & $\bar{2}$ & $\bar{6}$ & $\bar{3}$ \\ \hline
-				$\bar{5}$	& $\bar{0}$ & $\bar{5}$ & $\bar{3}$ & $\bar{1}$ & $\bar{6}$ & $\bar{4}$ & $\bar{2}$ \\ \hline
-				$\bar{6}$	& $\bar{0}$ & $\bar{6}$ & $\bar{5}$ & $\bar{4}$ & $\bar{3}$ & $\bar{2}$ & $\bar{1}$ \\ \hline
+				$\bar{1}$	& $\bar{0}$ & $\bar{1}$\cellcolor{yellow} & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ & $\bar{6}$ \\ \hline
+				
+				$\bar{2}$	& $\bar{0}$ & $\bar{2}$ & $\bar{4}$ & $\bar{6}$ & $\bar{1}$\cellcolor{yellow} & $\bar{3}$ & $\bar{5}$ \\ \hline
+				
+				$\bar{3}$	& $\bar{0}$ & $\bar{3}$ & $\bar{6}$ & $\bar{2}$ & $\bar{5}$ & $\bar{1}$\cellcolor{yellow} & $\bar{4}$ \\ \hline
+				
+				$\bar{4}$	& $\bar{0}$ & $\bar{4}$ & $\bar{1}$\cellcolor{yellow} & $\bar{5}$ & $\bar{2}$ & $\bar{6}$ & $\bar{3}$ \\ \hline
+				
+				$\bar{5}$	& $\bar{0}$ & $\bar{5}$ & $\bar{3}$ & $\bar{1}$\cellcolor{yellow} & $\bar{6}$ & $\bar{4}$ & $\bar{2}$ \\ \hline
+				
+				$\bar{6}$	& $\bar{0}$ & $\bar{6}$ & $\bar{5}$ & $\bar{4}$ & $\bar{3}$ & $\bar{2}$ & $\bar{1}$\cellcolor{yellow} \\ \hline
 			\end{tabular}
 		\end{minipage}
 		\hfill
@@ -268,31 +480,146 @@
 			\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
 				\hline
 				$\cdot$		& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ & $\bar{6}$ & $\bar{7}$ \\ \hline
+				
 				$\bar{0}$	& $\bar{0}$ & $\bar{0}$ & $\bar{0}$ & $\bar{0}$ & $\bar{0}$ & $\bar{0}$ & $\bar{0}$ & $\bar{0}$ \\ \hline
-				$\bar{1}$	& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ & $\bar{6}$ & $\bar{7}$ \\ \hline
+				
+				$\bar{1}$	& $\bar{0}$ & $\bar{1}$\cellcolor{yellow} & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ & $\bar{6}$ & $\bar{7}$ \\ \hline
+				
 				$\bar{2}$	& $\bar{0}$ & $\bar{2}$ & $\bar{4}$ & $\bar{6}$ & $\bar{0}$ & $\bar{2}$ & $\bar{4}$ & $\bar{6}$ \\ \hline
-				$\bar{3}$	& $\bar{0}$ & $\bar{3}$ & $\bar{6}$ & $\bar{1}$ & $\bar{4}$ & $\bar{7}$ & $\bar{2}$ & $\bar{5}$ \\ \hline
+				
+				$\bar{3}$	& $\bar{0}$ & $\bar{3}$ & $\bar{6}$ & $\bar{1}$\cellcolor{yellow} & $\bar{4}$ & $\bar{7}$ & $\bar{2}$ & $\bar{5}$ \\ \hline
+				
 				$\bar{4}$	& $\bar{0}$ & $\bar{4}$ & $\bar{0}$ & $\bar{4}$ & $\bar{0}$ & $\bar{4}$ & $\bar{0}$ & $\bar{4}$ \\ \hline
-				$\bar{5}$	& $\bar{0}$ & $\bar{5}$ & $\bar{2}$ & $\bar{7}$ & $\bar{4}$ & $\bar{1}$ & $\bar{6}$ & $\bar{3}$ \\ \hline
+				
+				$\bar{5}$	& $\bar{0}$ & $\bar{5}$ & $\bar{2}$ & $\bar{7}$ & $\bar{4}$ & $\bar{1}$\cellcolor{yellow} & $\bar{6}$ & $\bar{3}$ \\ \hline
+				
 				$\bar{6}$	& $\bar{0}$ & $\bar{6}$ & $\bar{4}$ & $\bar{2}$ & $\bar{0}$ & $\bar{6}$ & $\bar{4}$ & $\bar{2}$ \\ \hline
-				$\bar{7}$	& $\bar{0}$ & $\bar{7}$ & $\bar{6}$ & $\bar{5}$ & $\bar{4}$ & $\bar{3}$ & $\bar{2}$ & $\bar{1}$ \\ \hline
+				
+				$\bar{7}$	& $\bar{0}$ & $\bar{7}$ & $\bar{6}$ & $\bar{5}$ & $\bar{4}$ & $\bar{3}$ & $\bar{2}$ & $\bar{1}$\cellcolor{yellow} \\ \hline
 			\end{tabular}
 		\end{minipage}
 	\end{table}	
 \end{frame}
 
-\section{Miller-Rabin Test}
+
+\begin{frame}
+	\frametitle{Multiplicative Inverses}
+	\begin{center}
+		\resizebox{!}{0.85\textheight}{%		
+			\begin{tikzpicture}
+			\path[mindmap,concept color=black,text=white]
+			node[concept] {Background for Miller-Rabin Test}
+			[clockwise from=0]
+			child[concept color=green!50!black] {
+				node[concept] {Divisibility}
+				[clockwise from=0]
+				child { node[concept](gcd) {GCD} }
+				child { node[concept](combos) {Linear Combinations} }
+			}
+			child[concept color=gray!50] { node[concept](congruence) {Congruence Classes} }
+			child[concept color=gray!50] { node[concept] {Algebraic Structures}
+				[clockwise from=-90]
+				child[concept color=gray!50] { node[concept] {Monoid} 
+					child[grow=-45] { node[concept] {Set} }
+					child[grow=-90] { node[concept] {Associative Binary Operation} }
+					child[grow=-135] { node[concept] {Identity Element} }
+				}
+				child { node[concept] {Abelian Group} 
+					child[grow=-110] { node[concept] {Monoid} }
+					child[grow=-155] { node[concept] {Inverses} }
+					child[grow=-200]{ node[concept] {Commu-tative Operation} }
+				}
+				child { node[concept](ring) {Ring}
+					[clockwise from=-180]
+					child[grow=190] { node[concept] {Abelian Group Under Addition} }
+					child[grow=140] { node[concept] {Monoid Under Multiplication} }
+					child[grow=90] { node[concept] {Disribution} }
+				}				
+			};
+			\draw [concept connection] (gcd) edge (combos);						
+			\end{tikzpicture}
+		}
+	\end{center}	
+\end{frame}
+
+\begin{frame}
+	\frametitle{Multiplicative Inverses}
+	
+	\begin{itemize}
+		\item $\gcd(a,p)=1$ \pause
+		\item $ax + py = 1$ \pause
+		\item $ax = 1 + (-y)p$ or $ax \equiv 1 \pmod p$ \pause
+		\item Thus, $\overline{a \cdot x} = \bar{a} \cdot \bar{x} = \bar{1}$.
+	\end{itemize}
+		
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Zero Product Property}	
+	
+	\begin{itemize}
+		\item If both $\bar{a} = \bar{0}$ and $\bar{b} = \bar{0}$, then $$\bar{a} \cdot \bar{b} = \bar{0} \cdot \bar{0} = \overline{0 \cdot 0} = \bar{0}.$$\pause
+		\item If $\bar{a} \neq \bar{0}$, then 
+		\begin{align*}
+		\bar{a} \cdot \bar{b} &= \bar{0} \\
+		\bar{a}^{-1} \cdot \bar{a} \cdot \bar{b} &= \bar{a}^{-1} \cdot \bar{0} \\
+		\bar{b} &= \bar{0}.
+		\end{align*}\pause
+		
+		\item 
+		If $\bar{b} \neq \bar{0}$, then 
+		\begin{align*}
+		\bar{a} \cdot \bar{b} &= \bar{0} \\
+		\bar{a} \cdot \bar{b} \cdot \bar{b}^{-1} &= \bar{0} \cdot \bar{b}^{-1} \\
+		\bar{a} &= \bar{0}. \\
+		\end{align*}
+	\end{itemize}
+	
+\end{frame}
+
+\begin{frame}
+	\frametitle{A Pattern Perceptable}
+	\begin{table}[]
+		\centering
+		\caption{Exponents in $\Z_5$}
+		\begin{tabular}{|l|l|l|l|l|l|}
+			\hline
+			$\bar{a}$ 		& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ \\ \hline
+			$\bar{a}^2$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{4}$ & $\bar{4}$ & $\bar{1}$ \\ \hline
+			$\bar{a}^3$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{3}$ & $\bar{2}$ & $\bar{4}$ \\ \hline	
+			$\bar{a}^4$ 	& $\bar{0}$ & $\bar{1}$\cellcolor{yellow} & $\bar{1}$\cellcolor{yellow} & $\bar{1}$\cellcolor{yellow} & $\bar{1}$\cellcolor{yellow} \\ \hline
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}
+	\frametitle{A Pattern Perceptable}
+	\begin{table}[]
+		\centering
+		\caption{Exponents in $\Z_6$}
+		\begin{tabular}{|l|l|l|l|l|l|l|}
+			\hline
+			$\bar{a}$ 		& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ \\ \hline
+			$\bar{a}^2$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{4}$ & $\bar{3}$ & $\bar{4}$ & $\bar{1}$ \\ \hline
+			$\bar{a}^3$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ \\ \hline	
+			$\bar{a}^4$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{4}$ & $\bar{3}$ & $\bar{4}$ & $\bar{1}$ \\ \hline
+			$\bar{a}^5$ 	& $\bar{0}$ & $\bar{1}$\cellcolor{yellow} & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ \\ \hline			
+		\end{tabular}
+	\end{table}
+\end{frame}
+
 \begin{frame}[allowframebreaks]
 	\frametitle{Fermat's Little Theorem}
 	
-	\begin{theorem}[Fermat's Little Theorem \cite{pommersheim}]\label{theorem:fermats_little_theorem}
-		Let $p$ be prime, and let $\bar{a} \in \Z_p, \bar{a} \neq \bar{0}$. Then $$ \bar{a}^{p-1} = \bar{1}.$$
+	\begin{theorem}[Fermat's Little Theorem]\label{theorem:fermats_little_theorem}
+		Let $p$ be prime, and let $\bar{a} \in \Z_p$ with $\bar{a} \neq \bar{0}$. Then $$ \bar{a}^{p-1} = \bar{1}.$$
 	\end{theorem}
 
 	\begin{proofs}
 		Let $p$ be prime, and let $\bar{a} \in \Z_p, \bar{a} \neq \bar{0}$.
-		By \ref{lemma:unique_inverses_in_Zp}, we know that $\Z_p$ contains a unique inverse for each of its elements. 
-		Furthermore, $\bar{1}^{-1} = \bar{1}$ and $\overline{p-1}^{-1} = \overline{p-1}$ by \ref{lemma:1_and_p-1_own_inverses}.
+		We know that $\Z_p$ contains a unique inverse for each of its elements. 
+		Furthermore, $\bar{1}^{-1} = \bar{1}$ and $\overline{p-1}^{-1} = \overline{p-1}$.
 		Thus, $\bar{1} \cdot \bar{2} \cdot \bar{3} \cdots \overline{p-1} = \bar{1} \cdot \overline{p-1} = \overline{p-1}$. 
 		Then 
 		\begin{align*}
@@ -321,6 +648,66 @@
 		Therefore, if $p$ is prime, then $\bar{a}^{p-1} = \bar{1}$ for all $\bar{a} \in \Z_p, \bar{a} \neq \bar{0}$.
 	\end{proofs}
 		
+\end{frame}
+
+\begin{frame}
+	\frametitle{Review}
+%	\begin{itemize}
+%		\item $\Z_n$ is a ring.\pause
+%		\item Let $p$ be prime, then
+%		\begin{itemize}
+%			\item $\exists \bar{a}^{-1} \in \Z_p:$ $$\bar{a} \cdot \bar{a}^{-1} = \bar{a}^{-1} \cdot \bar{a} = \bar{1}$$ for all $\bar{a} \in \Z_p$, and\pause
+%			\item $\bar{a}^{p-1} = \bar{1}$.
+%		\end{itemize}
+%	\end{itemize}
+%	
+	\begin{figure}[!htb]
+		\minipage{0.32\textwidth}
+		\includegraphics[width=\linewidth]{left_solid.png}
+		\begin{center}
+			$\Z_n$ is a ring.
+		\end{center}
+		%\caption{A really Awesome Image}\label{fig:awesome_image1}
+		\endminipage\hfill\pause
+		\noindent\fcolorbox{red}{gray}{%
+		\minipage{0.32\textwidth}
+		\includegraphics[width=\linewidth]{center_solid.png}
+		\begin{center}
+			\color{white}
+			Let $p$ be prime. Then $\exists \bar{a}^{-1} \in \Z_p:$ $$\bar{a} \cdot \bar{a}^{-1} = \bar{a}^{-1} \cdot \bar{a} = \bar{1}$$ for all $\bar{a} \in \Z_p$
+		\end{center}
+		\endminipage}\hfill\pause
+		\minipage{0.32\textwidth}%
+		\includegraphics[width=\linewidth]{right_solid.png}
+		\begin{center}
+			Let $p$ be prime. Then $\bar{a}^{p-1} = \bar{1}$.
+		\end{center}
+		\endminipage
+	\end{figure}	
+\end{frame}
+
+\section{Miller-Rabin Test}
+
+\begin{frame}
+	\frametitle{Example: Completing the Square in $\Z_{13}$}
+	
+	\begin{itemize}
+		\item Choose $\bar{6} \in \Z_{13}$\pause
+		\item Factor
+		\begin{align*}
+		\bar{6}^{13-1} &= \bar{1} \\
+		\bar{6}^{12} - \bar{1} &= \bar{0} \\
+		(\bar{6}^{6} + \bar{1}) \cdot (\bar{6}^{6} - \bar{1}) &= \bar{0} \\
+		(\bar{6}^{6} + \bar{1}) \cdot (\bar{6}^{3} + \bar{1}) \cdot (\bar{6}^{3} - \bar{1}) &= \bar{0} 		
+		\end{align*}\pause
+		\item Zero product product property
+		\begin{align*}
+			(\bar{6}^{6} + \bar{1}) = \bar{0} &\iff \bar{6}^{6} = -\bar{1} \\
+			(\bar{6}^{3} + \bar{1}) = \bar{0} &\iff \bar{6}^{3} = -\bar{1}\\
+			(\bar{6}^{3} - \bar{1}) = \bar{0} &\iff \bar{6}^{3} = \bar{1}
+		\end{align*}
+	\end{itemize}
+	
 \end{frame}
 
 \begin{frame}
@@ -362,26 +749,22 @@
 
 \begin{frame}
 	\frametitle{Effectiveness of the Miller-Rabin Test}
+	\begin{itemize}
+		\item At least $\frac{3}{4}$ of the integers $a$ in the range $1,2,\ldots,n-1$ are Miller-Rabin witnesses.
+		\item If we run the test 100 times on a composite number, the probability that we will never find a witness is less than $\left( \frac{1}{4} \right)^{100} = 6.223 \times 10^{-61}$.
+	\end{itemize}
+	
+	\begin{center}
+		\includegraphics[width=0.7\textwidth]{miller_rabin_example}
+	\end{center}
+	
 \end{frame}
 
-%\begin{frame}
-%	\frametitle{Machine Learning Algorithms}
-%	
-%	\begin{itemize}
-%		\item Target function --- underlying function that maps inputs to outputs (if it exists)
-%		\item Solution --- estimate of the target function by learning algorithm (also called the decision function in classification algorithms)
-%		\item Hypothesis space --- a set or class of candidate solutions (known as hypotheses)
-%		\item Learning algorithm --- uses training data to select a hypothesis 
-%		\item Features --- the quantities used to describe the data
-%		\item Attributes --- original quantities from data
-%	\end{itemize}
-%	
-%\end{frame}
 
 \section{Suppose Vector Machine}
 
 \begin{frame}
-	\frametitle{What is a Support Vector Machine (SVM)?}
+	\frametitle{Linear Classification with a Twist}
 	\begin{itemize}
 		\item Use non-linear function $K$ to map input vector to a higher dimensional feature space 
 		
@@ -396,34 +779,101 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Linear Classification}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Support Vector Machine}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Feature Space}
-
-	Let $b \in \Z : b \geq 2$. Then every $N \in \Z : N > 0$ can be expressed uniquely in the form $N = a_kb^k + a_{k-1}b^{b-1} + \cdots + a_1 b + a_0$, where $a_0, a_1, \ldots, a_k$ are nonnegative integers less than $b$, $a_k \neq 0$, and $k \geq 0$. \cite{koshy}
-
-\end{frame}
-
-\begin{frame}
 	\frametitle{Training Methodology}
 	
-	\begin{definition}[Training Set]
-		A \textbf{training set} is a collection of training examples, which are also called training data. It is usually denoted by $S = \{ (x_1, y_1),(x_2, y_2),\ldots, (x_n, y_n)\} \subset X \times Y$, where $n$ is the number of examples. We refer to $x_i$ as examples or instances and $y_i$ as their labels.\cite{christianini}
-	\end{definition}
-	
+	\begin{itemize}
+		\item Integer range: 2-1000 \pause
+		\item 2,755,256 models using $$K(\vec{x}, \vec{x}^\prime) := \exp\left( -\gamma \lVert \vec{x} - \vec{x}^\prime \rVert^2 \right)$$ with $\gamma = \frac{1}{n}$, where $n$ is the length of the longest vector in the domain. \pause
+		\item Base $b$ representations. For example, let $b = 6$. Then 
+		\begin{align*}
+			32 &\to (5,2) \\
+			153 &\to (4,1,3) \\
+			1000 &\to (4,3,4,4)
+		\end{align*}\pause
+		\item Class weight for primes
+		\item Penalty parameter C
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Testing: Class Weight of Primes}
+	\begin{center}
+		\includegraphics[width=\textwidth]{weight_demo}
+	\end{center}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Testing: Penalty Parameter C}
+	\begin{center}
+		\includegraphics[width=\textwidth]{c_demo}
+	\end{center}	
 \end{frame}
 
 \begin{frame}
-	\frametitle{Comparison}
+	\frametitle{Testing: Base b Representations}
+	\begin{center}
+		\includegraphics[width=\textwidth]{base_demo}
+	\end{center}		
 \end{frame}
 
-\begin{frame}[allowframebreaks]
+\begin{frame}
+	\frametitle{Best Models}
+	
+	\begin{table}[]
+		\centering
+		%\caption{My caption}
+		%\label{my-label}
+		\begin{tabular}{|c|c|c|c|}
+			\hline
+			\textbf{Base} & \textbf{C} & \textbf{Weight} & \textbf{Accuracy} \\ \hline
+			6 & 3.2 & 2 & 0.86 \\ \hline
+			6 & 3.7 & 2 & 0.86 \\ \hline
+			6 & 3.8 & 2 & 0.86 \\ \hline
+			6 & 3.9 & 2 & 0.86 \\ \hline
+			6 & 4.0 & 2 & 0.86 \\ \hline
+			6 & 4.1 & 2 & 0.86 \\ \hline
+			6 & 4.7 & 2 & 0.86 \\ \hline
+			6 & 4.8 & 2 & 0.86 \\ \hline
+			6 & 4.9 & 2 & 0.86 \\ \hline
+		\end{tabular}
+	\end{table}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Conclusion}
+	\begin{center}
+		\includegraphics[width=\textwidth]{complete}
+	\end{center}			
+\end{frame}
+
+\begin{frame}
+	\frametitle{Conclusion: Sly Models}
+	
+	\begin{itemize}
+		\item 168 primes between 2 and 1000 (inclusive)
+		
+		\begin{seqsplit}
+			\tiny
+			\{2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997\}
+			\end{seqsplit}
+			
+		\item 16.8\% prime and 83.2\% composite 
+		
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+	\frametitle{Conclusion: Finding the Right $K$}
+	\begin{center}
+		\includegraphics[height=0.88\textheight]{base_32}
+	\end{center}			
+\end{frame}
+
+
+\begin{frame}
 	\frametitle{References}
 	\bibliographystyle{amsalpha}
 	\bibliography{../report/refs.bib}	
@@ -431,6 +881,11 @@
 
 \begin{frame}
 	\frametitle{Acknowledgements}
+	\begin{itemize}
+		\item Professor Tom Edgar
+		\item Professor Yajun An
+		\item My wife, Nora.
+	\end{itemize}
 \end{frame}
 
 

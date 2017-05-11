@@ -39,30 +39,37 @@ def fermats_test(n):
 
     return {"nonwitnesses": nonwitnesses, "witnesses": witnesses}
 
-def miller_rabin(n):
- 
-    if not are_integers(n):
+def miller_rabin(n, a=None):
+
+    if a is None:
+         a = randint(1,n-1)
+    else:
+        if a == 0:
+            raise Exception("a must be nonzero")
+        if a < 1 or a > n-1:
+            raise Exception("a must be between 1 and n-1 (inclusive)")
+
+    if not are_integers(a,n):
         raise Exception("n must be an integer")
+
     if not n > 0:
         raise Exception("n must be a positive integer")
     if n % 2 == 0:
         raise Exception("n must be odd")
-
-    base = randint(1,n-1)
-
+        
     result = "composite"
 
     for k in range(1, (n-1) // 2 + 1):
         exp = (n-1) // pow(2,k)
-        rhs = pow(base, exp, n)
+        rhs = pow(a, exp, n)
 
-        print(base, exp, (rhs + 1) % n)
+        # print("%d^%d = %d" % (a, exp, (rhs + 1) % n))
 
         if not (rhs + 1) % n:
             result = "not composite"
 
         if (exp / 2) % 1 != 0:
-            print(base, exp, (rhs - 1) % n)
+            # print("%d^%d = %d" % (a, exp, (rhs - 1) % n))
             if not (rhs - 1) % n:
                 result = "not composite"
             #return {base, True}
