@@ -10,7 +10,7 @@ import argparse
 DATA_DIR = "./data/"
 RESULTS_DIR = "./results/"
 
-def train(max_base, max_C, kernel, max_class_weight):
+def train(base, kernel, min_C, max_C, min_class_weight, max_class_weight):
 
 	seed = int(time())
 
@@ -22,26 +22,24 @@ def train(max_base, max_C, kernel, max_class_weight):
 			result = RESULTS_DIR + "%f_%s" % (time(), dataset)
 			with open(result, "w") as f:
 
-				for base in range(2, max_base):
+				data = get_space(dataset, base)
+				min_max_scaler = preprocessing.MinMaxScaler()
+				X_train = min_max_scaler.fit_transform(data["train.X"])
+				y_train = data["train.y"]
+				X_test = min_max_scaler.fit_transform(data["test.X"])
+				y_test = data["test.y"]
 
-					data = get_space(dataset, base)
-					min_max_scaler = preprocessing.MinMaxScaler()
-					X_train = min_max_scaler.fit_transform(data["train.X"])
-					y_train = data["train.y"]
-					X_test = min_max_scaler.fit_transform(data["test.X"])
-					y_test = data["test.y"]
+				C = min_C
 
-					C = 0.1
-
-					while C <= max_C:
-						for weight in range(1, max_class_weight + 1):
-							c_weight = {1: weight}
-							clf = SVC(C=C, kernel=kernel, cache_size=1000, class_weight=c_weight, random_state=seed)
-							clf.fit(X_train, y_train)
-							score = clf.score(X_test, y_test)
-							f.write("%d, %d, %f, %s, %d, %f\n" % (seed, base, C, kernel, weight, score))
-							print("%d, %d, %f, %s, %d, %f\n" % (seed, base, C, kernel, weight, score))
-						C += 0.1
+				while C <= max_C:
+					for weight in range(min_class_weight, max_class_weight + 1):
+						c_weight = {1: weight}
+						clf = SVC(C=C, kernel=kernel, cache_size=1000, class_weight=c_weight, random_state=seed)
+						clf.fit(X_train, y_train)
+						score = clf.score(X_test, y_test)
+						f.write("%d, %d, %f, %s, %d, %f\n" % (seed, base, C, kernel, weight, score))
+						print("%d, %d, %f, %s, %d, %f\n" % (seed, base, C, kernel, weight, score))
+					C += 0.1
 
 
 def get_data(dataset_filename):
@@ -106,13 +104,17 @@ def get_space(dataset, base, part=0.7):
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description="Support Vector Machine Classifier")
-	parser.add_argument('-b', metavar='max_base', dest='max_base', type=int, nargs='?', help='max base b representation of integers')
-	parser.add_argument('-c', metavar='max_C', dest='max_c', type=int, nargs='?', help='max penalty parameter C of the error term.')
+	parser.add_argument('-b', metavar='base', dest='base', type=int, nargs='?', help='base b representation of integers')
 	parser.add_argument('-k', metavar="kernel", dest="kernel", type=str, nargs='?', help="must be one of ‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ or a callable")
-	parser.add_argument('-w', metavar='max_weight', dest='max_weight', type=int, nargs='?', help='max weight of primes class')
+	parser.add_argument('--min_c', metavar='min_c', dest='min_c', type=int, nargs='?', help='min penalty parameter C of the error term.')
+	parser.add_argument('--max_c', metavar='max_c', dest='max_c', type=int, nargs='?', help='max penalty parameter C of the error term.')
+	parser.add_argument('--min_w', metavar='min_weight', dest='min_weight', type=int, nargs='?', help='min weight of primes class')
+	parser.add_argument('--max_w', metavar='max_weight', dest='max_weight', type=int, nargs='?', help='max weight of primes class')
 
 	args = parser.parse_args()
 
-	train(max_base=args.max_base, max_C=args.max_c, kernel=args.kernel, max_class_weight=args.max_weight)
+	# train(base, kernel, min_C, max_C, min_class_weight, max_class_weight):
+
+	train(base=args.base, kernel=args.kernel, min_C=args.min_c, max_C=args.max_c, min_class_weight=args.min_weight, max_class_weight=args.max_weight)
 
 
