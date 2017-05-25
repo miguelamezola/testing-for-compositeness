@@ -1,10 +1,10 @@
 \begin{thebibliography}{1}
 
-\bibitem{christianini}
-Nello Cristianini and John Shawe-Taylor.
-\newblock {\em An introduction to support vector machines: and other
-  kernel-based learning methods}.
-\newblock Cambridge University Press, Cambridge, U.K., 2012.
+\bibitem{gauss}
+Carl~Friedrich Gauss.
+\newblock {\em Disquisitiones Arithmeticae}.
+\newblock Yale University Press, 1966.
+\newblock Translated by Arthur A. Clarke, S.J.
 
 \bibitem{pommersheim}
 T.~Marks J.~Pommersheim and E.~Flapan.
@@ -12,13 +12,29 @@ T.~Marks J.~Pommersheim and E.~Flapan.
   and Stories}.
 \newblock John Wiley \& Sons, 2010.
 
-\bibitem{koshy}
-T.~Koshy.
-\newblock {\em Elementary Number Theory with Applications}.
-\newblock Harcoutrt/Academic Press, 2002.
+\bibitem{scikit-learn}
+F.~Pedregosa, G.~Varoquaux, A.~Gramfort, V.~Michel, B.~Thirion, O.~Grisel,
+  M.~Blondel, P.~Prettenhofer, R.~Weiss, V.~Dubourg, J.~Vanderplas, A.~Passos,
+  D.~Cournapeau, M.~Brucher, M.~Perrot, and E.~Duchesnay.
+\newblock Scikit-learn: Machine learning in {P}ython.
+\newblock {\em Journal of Machine Learning Research}, 12:2825--2830, 2011.
 
-\bibitem{mathworld:well_ordering_principle}
-Eric~W. Weisstein.
-\newblock {"Well Ordering Principle." From MathWorld--A Wolfram Web Resource}.
+\bibitem{wiki:fermats_little_theorem}
+Wikipedia.
+\newblock {Fermat's little theorem --- Wikipedia{,} The Free Encyclopedia},
+  2017.
+\newblock [Online; accessed 19-May-2017].
+
+\bibitem{wiki:svm}
+Wikipedia.
+\newblock {Support vector machine --- Wikipedia{,} The Free Encyclopedia},
+  2017.
+\newblock [Online; accessed 19-May-2017].
+
+\bibitem{mit}
+Patrick Winston.
+\newblock {6.034 Artificial Intelligence}.
+\newblock Fall 2010. Massachusetts Institute of Technology: MIT OpenCourseWare,
+  https://ocw.mit.edu. License: Creative Commons BY-NC-SA.
 
 \end{thebibliography}

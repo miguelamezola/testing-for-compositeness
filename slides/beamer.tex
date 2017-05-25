@@ -42,6 +42,8 @@
 \usepackage{tikz}
 \usetikzlibrary{mindmap,trees}
 
+\usepackage{textpos} 
+
 
 %New commands to simplify typing. You do not need to use them all, or at all.
 \newcommand\Z{{\mathbb Z}}
@@ -117,11 +119,11 @@
 \usetheme{JuanLesPins}
 \usecolortheme{beaver}
 \title{Testing for Compositeness}
-\subtitle{Miller-Rabin vs Support Vector Machine Classification}
+\subtitle{Miller-Rabin vs Machine Learning}
 \author{Miguel Amezola}
 \institute{Department of Mathematics\\ Pacific Lutheran University}
 \date{\today}
-\logo{\includegraphics[height=0.5cm]{logo}}
+%\logo{\includegraphics[height=0.5cm]{logo}}
 
 
 \AtBeginSection[]
@@ -133,6 +135,11 @@
 }
 
 \begin{document}
+	
+\addtobeamertemplate{frametitle}{}{%
+	\begin{textblock*}{100mm}(0.987\textwidth,-1.09cm)
+		\includegraphics[height=1.1cm,width=1.1cm]{logo}
+	\end{textblock*}}
 
 % Title page
 \begin{frame}
@@ -141,18 +148,6 @@
 
 
 \section{Introduction}
-\begin{frame}
-	\begin{tabular}{cl}  
-		\begin{tabular}{c}
-			\includegraphics[height=5cm, width=3.5cm]{gauss}
-		\end{tabular}
-		& \begin{tabular}{l}
-			\parbox{0.5\linewidth}{%  change the parbox width as appropiate
-				``The problem of distinguishing prime numbers from composite numbers \ldots is known to be one of the most important and useful in arithmetic. \ldots Further, the dignity of the science itself seems to require that every possible means be explored for the solution of a problem so elegant and so celebrated." --- \textit{Disquisitiones Arithmeticae (1801): Article 329} 
-			}
-		\end{tabular}  \\
-	\end{tabular}	
-\end{frame}
 
 
 \begin{frame}
@@ -167,9 +162,18 @@
 	\end{definition}		
 \end{frame}
 
-%\begin{frame}
-%	\frametitle{Primality Testing}
-%\end{frame}
+\begin{frame}
+\begin{tabular}{cl}  
+	\begin{tabular}{c}
+		\includegraphics[height=5cm, width=3.5cm]{gauss}
+	\end{tabular}
+	& \begin{tabular}{l}
+		\parbox{0.5\linewidth}{%  change the parbox width as appropiate
+			``The problem of distinguishing prime numbers from composite numbers \ldots is known to be one of the most important and useful in arithmetic. \ldots Further, the dignity of the science itself seems to require that every possible means be explored for the solution of a problem so elegant and so celebrated." --- \textit{Disquisitiones Arithmeticae (1801): Article 329} 
+		}
+	\end{tabular}  \\
+\end{tabular}	
+\end{frame}
 
 \tikzset{
  	invisible/.style={opacity=0},
@@ -189,32 +193,33 @@
 			\path[mindmap,concept color=black,text=white]
 			node[concept] {Background for Miller-Rabin Test}
 			[clockwise from=0]
+			child[concept color=blue] { node[concept](congruence) {Congruence Classes} }			
 			child[concept color=green!50!black] {
 				node[concept] {Divisibility}
 				[clockwise from=0]
-				child[visible on=<2->] { node[concept] {GCD} }
-				child[visible on=<3->] { node[concept] {Linear Combinations} }
+				child[visible on=<2->] { node[concept](gcd) {GCD} }
+				child[visible on=<3->] { node[concept](combos) {Linear Combinations} }
 			}
-			child[concept color=blue] { node[concept](congruence) {Congruence Classes} }
 			child[concept color=orange] { node[concept] {Algebraic Structures}
 				[clockwise from=-90]
-				child[visible on=<4->] { node[concept] {Monoid} 
+				child[visible on=<5->] { node[concept] {Monoid} 
 					child[grow=-45] { node[concept] {Set} }
 					child[grow=-90] { node[concept] {Associative Binary Operation} }
-					child[grow=-135, visible on=<5->] { node[concept] {Identity Element} }
+					child[grow=-135, visible on=<6->] { node[concept] {Identity Element} }
 					}
-				child[visible on=<6->] { node[concept] {Abelian Group} 
+				child[visible on=<7->] { node[concept] {Abelian Group} 
 					child[grow=-110] { node[concept] {Monoid} }
 					child[grow=-155] { node[concept] {Inverses} }
-					child[grow=-200, visible on=<7->]{ node[concept] {Commu-tative Operation} }
+					child[grow=-200, visible on=<8->]{ node[concept] {Commu-tative Operation} }
 					}
-				child[visible on=<8->] { node[concept] {Ring}
+				child[visible on=<9->] { node[concept] {Ring}
 					[clockwise from=-180]
 					child[grow=190] { node[concept] {Abelian Group Under Addition} }
 					child[grow=140] { node[concept] {Monoid Under Multiplication} }
-					child[grow=90, visible on=<9->] { node[concept] {Disribution} }
+					child[grow=90, visible on=<10->] { node[concept] {Disribution} }
 					}				
 			};
+			\draw [concept connection, visible on=<4->] (gcd) edge (combos);				
 			\end{tikzpicture}
 		}
 	\end{center}
@@ -227,16 +232,16 @@
 
 	\begin{definition}[Congruent]\label{definition:congruent}
 		Let $a,b,n \in \Z$ with $n > 0$. We say that $a$ is congruent to $b$ modulo $n$ if $n \mid (a - b)$, denoted $a \equiv b \pmod n$. \cite{pommersheim}
-	\end{definition}
+	\end{definition}\pause
 	
 	\begin{example}\label{example:congruent}
 		Is 34 congruent to 4 modulo 10?\pause
 		
-		Subtracting 4 from 34, we have $34 - 4 = 30$.\pause
+		Subtracting 4 from 34, we have $34 - 4 = 30$.
 		
 		Does $10$ divide this difference?\pause 
 		
-		Yes, since $30 = 3 \cdot 10$.\pause
+		Yes, since $30 = 3 \cdot 10$.
 		
 		Thus, $34 \equiv 4 \pmod{10}$.
 	\end{example}
@@ -247,7 +252,7 @@
 	\begin{definition}[Congruence Class]\label{definition:congruence_class}
 		%		Let $n \in \N$, and let $b \in \Z$. Then the \textbf{congruence class} of $b$ modulo $n$ is the set of all integers congruent to $b$ modulo $n$: $$ \bar{b} := \{ x \in \Z : x \equiv b \pmod n \}. $$ The congruence class of $b$ modulo $n$ may also be defined as $$ \bar{b} := \{ b + kn : k \in \Z \}. $$
 		Let $a,n \in \Z$ with $n > 0$. We define the congruence class of $a$ modulo $n$ as the set of all integers congruent to $a$ modulo $n$; that is, $$\bar{a} := \{ x \in \Z : x \equiv a \pmod n \}.$$% $$ \bar{a} := \{ a + kn : k \in \Z \}.$$
-	\end{definition}
+	\end{definition}\pause
 	
 	\begin{definition}[$\Z_n$]\label{Definition: Zn}
 		Let $n > 0$ be any integer. We define $\Z_n$ to be the set of all congruence classes modulo $n$, i.e. $$ \Z_n := \{ \bar{0}, \bar{1}, \bar{2}, \ldots, \overline{n - 1} \}.$$
@@ -256,69 +261,8 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{$\Z_n$ Is a Monoid under Multiplication}
-	\begin{center}
-		\resizebox{!}{0.85\textheight}{%		
-			\begin{tikzpicture}
-			\path[mindmap,concept color=black,text=white]
-			node[concept] {Background for Miller-Rabin Test}
-			[clockwise from=0]
-			child[concept color=gray!50] {
-				node[concept] {Divisibility}
-				[clockwise from=0]
-				child { node[concept] {GCD} }
-				child { node[concept] {Linear Combinations} }
-			}
-			child[concept color=blue] { node[concept](congruence) {Congruence Classes} }
-			child[concept color=orange] { node[concept] {Algebraic Structures}
-				[clockwise from=-90]
-				child { node[concept] (monoid) {Monoid} 
-					child[grow=-45] { node[concept] {Set} }
-					child[grow=-90] { node[concept] {Associative Binary Operation} }
-					child[grow=-135] { node[concept] {Identity Element} }
-				}
-				child[concept color=gray!50] { node[concept] {Abelian Group} 
-					child[grow=-110] { node[concept] {Monoid} }
-					child[grow=-155] { node[concept] {Inverses} }
-					child[grow=-200]{ node[concept] {Commu-tative Operation} }
-				}
-				child[concept color=gray!50] { node[concept] {Ring}
-					[clockwise from=-180]
-					child[grow=190] { node[concept] {Abelian Group Under Addition} }
-					child[grow=140] { node[concept] {Monoid Under Multiplication} }
-					child[grow=90] { node[concept] {Disribution} }
-				}				
-			};
-
-			\draw [concept connection] (congruence) edge (monoid);
-
-			\end{tikzpicture}
-		}
-	\end{center}
-\end{frame}
-
-\begin{frame}
-	\frametitle{$\Z_n$ Is a Monoid under Multiplication}
-	
-	\begin{itemize}
-		\item $ \bar{a} \cdot \bar{b} := \overline{a \cdot b}.$\pause
-		\item By the associativity of integer multiplication, we have 
-		\begin{align*}
-		(\bar{a} \cdot \bar{b}) \cdot \bar{c} 
-		&= \overline{a \cdot b} \cdot \bar{c} \\
-		&= \overline{(a \cdot b) \cdot c} \\
-		&= \overline{a \cdot (b \cdot c)} \\
-		&= \bar{a} \cdot \overline{b \cdot c} \\
-		&= \bar{a} \cdot (\bar{b} \cdot \bar{c}).
-		\end{align*}\pause
-		\item Since $(n+1) = 1 + kn$ for $k=1 \in \Z$, we know $(n+1) \equiv 1 \pmod n$, which is en element in $\bar{1} \in \Z_n$.
-	\end{itemize}
-
-\end{frame}
-
-\begin{frame}
 	\frametitle{$\Z_n$ Is an Abelian Group under Addition}
-
+	
 	\begin{center}
 		\resizebox{!}{0.85\textheight}{%		
 			\begin{tikzpicture}
@@ -355,30 +299,93 @@
 			\end{tikzpicture}
 		}
 	\end{center}
-
+	
 \end{frame}
+
+
+%\begin{frame}
+%	\frametitle{$\Z_n$ Is a Monoid under Multiplication}
+%	\begin{center}
+%		\resizebox{!}{0.85\textheight}{%		
+%			\begin{tikzpicture}
+%			\path[mindmap,concept color=black,text=white]
+%			node[concept] {Background for Miller-Rabin Test}
+%			[clockwise from=0]
+%			child[concept color=gray!50] {
+%				node[concept] {Divisibility}
+%				[clockwise from=0]
+%				child { node[concept] {GCD} }
+%				child { node[concept] {Linear Combinations} }
+%			}
+%			child[concept color=blue] { node[concept](congruence) {Congruence Classes} }
+%			child[concept color=orange] { node[concept] {Algebraic Structures}
+%				[clockwise from=-90]
+%				child { node[concept] (monoid) {Monoid} 
+%					child[grow=-45] { node[concept] {Set} }
+%					child[grow=-90] { node[concept] {Associative Binary Operation} }
+%					child[grow=-135] { node[concept] {Identity Element} }
+%				}
+%				child[concept color=gray!50] { node[concept] {Abelian Group} 
+%					child[grow=-110] { node[concept] {Monoid} }
+%					child[grow=-155] { node[concept] {Inverses} }
+%					child[grow=-200]{ node[concept] {Commu-tative Operation} }
+%				}
+%				child[concept color=gray!50] { node[concept] {Ring}
+%					[clockwise from=-180]
+%					child[grow=190] { node[concept] {Abelian Group Under Addition} }
+%					child[grow=140] { node[concept] {Monoid Under Multiplication} }
+%					child[grow=90] { node[concept] {Disribution} }
+%				}				
+%			};
+%
+%			\draw [concept connection] (congruence) edge (monoid);
+%
+%			\end{tikzpicture}
+%		}
+%	\end{center}
+%\end{frame}
 
 \begin{frame}
-	\frametitle{$\Z_n$ Is an Abelian Group under Addition}
+	\frametitle{$\Z_n$ Is a Monoid under Multiplication}
+	
 	\begin{itemize}
-		\item $ \bar{a} + \bar{b} := \overline{a + b}$\pause
-		\item By the associativity of addition on the integers, we have 
+		\item $ \bar{a} \cdot \bar{b} := \overline{a \cdot b}.$\pause
+		\item By the associativity of integer multiplication, we have 
 		\begin{align*}
-		(\bar{a} + \bar{b}) + \bar{c} = \overline{a + b}  + \bar{c} 
-		&= \overline{(a + b) + c} = \overline{a + (b + c)} \\
-		&= \bar{a} + \overline{b + c} = \bar{a} + (\bar{b} + \bar{c})
+		(\bar{a} \cdot \bar{b}) \cdot \bar{c} 
+		&= \overline{a \cdot b} \cdot \bar{c} \\
+		&= \overline{(a \cdot b) \cdot c} \\
+		&= \overline{a \cdot (b \cdot c)} \\
+		&= \bar{a} \cdot \overline{b \cdot c} \\
+		&= \bar{a} \cdot (\bar{b} \cdot \bar{c}).
 		\end{align*}\pause
-		\item Inverses
-		\begin{align*}
-		\bar{a} + \overline{n-a} 
-		= \overline{a + n - a}
-		&= \bar{n} \\
-		&= \overline{n + (-a) + a}
-		= \overline{n-a} + \bar{a}
-		\end{align*}\pause
-		\item $\bar{a}+\bar{b} = \overline{a + b} = \overline{b + a} = \bar{b} + \bar{a}$
+		\item Since $(n+1) = 1 + kn$ for $k=1 \in \Z$, we know $(n+1) \equiv 1 \pmod n$, which is en element in $\bar{1} \in \Z_n$.
 	\end{itemize}
+
 \end{frame}
+
+%
+%\begin{frame}
+%	\frametitle{$\Z_n$ Is an Abelian Group under Addition}
+%	\begin{itemize}
+%		\item $ \bar{a} + \bar{b} := \overline{a + b}$\pause
+%		\item By the associativity of addition on the integers, we have 
+%		\begin{align*}
+%		(\bar{a} + \bar{b}) + \bar{c} = \overline{a + b}  + \bar{c} 
+%		&= \overline{(a + b) + c} = \overline{a + (b + c)} \\
+%		&= \bar{a} + \overline{b + c} = \bar{a} + (\bar{b} + \bar{c})
+%		\end{align*}\pause
+%		\item Inverses
+%		\begin{align*}
+%		\bar{a} + \overline{n-a} 
+%		= \overline{a + n - a}
+%		&= \bar{n} \\
+%		&= \overline{n + (-a) + a}
+%		= \overline{n-a} + \bar{a}
+%		\end{align*}\pause
+%		\item $\bar{a}+\bar{b} = \overline{a + b} = \overline{b + a} = \bar{b} + \bar{a}$
+%	\end{itemize}
+%\end{frame}
 
 \begin{frame}
 	\frametitle{Multiplication Distributes over Addition}
@@ -546,9 +553,9 @@
 	\frametitle{Multiplicative Inverses}
 	
 	\begin{itemize}
-		\item $\gcd(a,p)=1$ \pause
-		\item $ax + py = 1$ \pause
-		\item $ax = 1 + (-y)p$ or $ax \equiv 1 \pmod p$ \pause
+		\item $\gcd(a,p)=1$
+		\item $ax + py = 1$
+		\item $ax = 1 + (-y)p$ or $ax \equiv 1 \pmod p$ 
 		\item Thus, $\overline{a \cdot x} = \bar{a} \cdot \bar{x} = \bar{1}$.
 	\end{itemize}
 		
@@ -579,35 +586,65 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{A Pattern Perceptable}
-	\begin{table}[]
+	\frametitle{A Pattern Perceptable}	
+	\begin{table}[h!]
 		\centering
-		\caption{Exponents in $\Z_5$}
-		\begin{tabular}{|l|l|l|l|l|l|}
-			\hline
-			$\bar{a}$ 		& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ \\ \hline
-			$\bar{a}^2$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{4}$ & $\bar{4}$ & $\bar{1}$ \\ \hline
-			$\bar{a}^3$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{3}$ & $\bar{2}$ & $\bar{4}$ \\ \hline	
-			$\bar{a}^4$ 	& $\bar{0}$ & $\bar{1}$\cellcolor{yellow} & $\bar{1}$\cellcolor{yellow} & $\bar{1}$\cellcolor{yellow} & $\bar{1}$\cellcolor{yellow} \\ \hline
-		\end{tabular}
-	\end{table}
+		\begin{minipage}{0.48\textwidth}
+			\centering
+			\caption{Exponents in $\Z_5$}
+			\begin{tabular}{|l|l|l|l|l|l|}
+				\hline
+				$\bar{a}$ 		& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ \\ \hline
+				$\bar{a}^2$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{4}$ & $\bar{4}$ & $\bar{1}$ \\ \hline
+				$\bar{a}^3$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{3}$ & $\bar{2}$ & $\bar{4}$ \\ \hline	
+				$\bar{a}^4$ 	& $\bar{0}$ & $\bar{1}$\cellcolor{yellow} & $\bar{1}$\cellcolor{yellow} & $\bar{1}$\cellcolor{yellow} & $\bar{1}$\cellcolor{yellow} \\ \hline
+			\end{tabular}
+
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.48\textwidth}
+			\centering
+			\caption{Exponents in $\Z_6$}
+			\begin{tabular}{|l|l|l|l|l|l|l|}
+				\hline
+				$\bar{a}$ 		& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ \\ \hline
+				$\bar{a}^2$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{4}$ & $\bar{3}$ & $\bar{4}$ & $\bar{1}$ \\ \hline
+				$\bar{a}^3$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ \\ \hline	
+				$\bar{a}^4$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{4}$ & $\bar{3}$ & $\bar{4}$ & $\bar{1}$ \\ \hline
+				$\bar{a}^5$ 	& $\bar{0}$ & $\bar{1}$\cellcolor{yellow} & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ \\ \hline			
+			\end{tabular}
+		\end{minipage}
+	\end{table}	
 \end{frame}
 
-\begin{frame}
-	\frametitle{A Pattern Perceptable}
-	\begin{table}[]
-		\centering
-		\caption{Exponents in $\Z_6$}
-		\begin{tabular}{|l|l|l|l|l|l|l|}
-			\hline
-			$\bar{a}$ 		& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ \\ \hline
-			$\bar{a}^2$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{4}$ & $\bar{3}$ & $\bar{4}$ & $\bar{1}$ \\ \hline
-			$\bar{a}^3$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ \\ \hline	
-			$\bar{a}^4$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{4}$ & $\bar{3}$ & $\bar{4}$ & $\bar{1}$ \\ \hline
-			$\bar{a}^5$ 	& $\bar{0}$ & $\bar{1}$\cellcolor{yellow} & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ \\ \hline			
-		\end{tabular}
-	\end{table}
-\end{frame}
+%	\begin{table}[]
+%		\centering
+%		\caption{Exponents in $\Z_5$}
+%		\begin{tabular}{|l|l|l|l|l|l|}
+%			\hline
+%			$\bar{a}$ 		& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ \\ \hline
+%			$\bar{a}^2$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{4}$ & $\bar{4}$ & $\bar{1}$ \\ \hline
+%			$\bar{a}^3$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{3}$ & $\bar{2}$ & $\bar{4}$ \\ \hline	
+%			$\bar{a}^4$ 	& $\bar{0}$ & $\bar{1}$\cellcolor{yellow} & $\bar{1}$\cellcolor{yellow} & $\bar{1}$\cellcolor{yellow} & $\bar{1}$\cellcolor{yellow} \\ \hline
+%		\end{tabular}
+%	\end{table}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{A Pattern Perceptable}
+%	\begin{table}[]
+%		\centering
+%		\caption{Exponents in $\Z_6$}
+%		\begin{tabular}{|l|l|l|l|l|l|l|}
+%			\hline
+%			$\bar{a}$ 		& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ \\ \hline
+%			$\bar{a}^2$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{4}$ & $\bar{3}$ & $\bar{4}$ & $\bar{1}$ \\ \hline
+%			$\bar{a}^3$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ \\ \hline	
+%			$\bar{a}^4$ 	& $\bar{0}$ & $\bar{1}$ & $\bar{4}$ & $\bar{3}$ & $\bar{4}$ & $\bar{1}$ \\ \hline
+%			$\bar{a}^5$ 	& $\bar{0}$ & $\bar{1}$\cellcolor{yellow} & $\bar{2}$ & $\bar{3}$ & $\bar{4}$ & $\bar{5}$ \\ \hline			
+%		\end{tabular}
+%	\end{table}
+%\end{frame}
 
 \begin{frame}[allowframebreaks]
 	\frametitle{Fermat's Little Theorem}
@@ -618,16 +655,16 @@
 
 	\begin{proofs}
 		Let $p$ be prime, and let $\bar{a} \in \Z_p, \bar{a} \neq \bar{0}$.
-		We know that $\Z_p$ contains a unique inverse for each of its elements. 
+		We know that $\Z_p$ contains a unique inverse for each of its elements.
 		Furthermore, $\bar{1}^{-1} = \bar{1}$ and $\overline{p-1}^{-1} = \overline{p-1}$.
-		Thus, $\bar{1} \cdot \bar{2} \cdot \bar{3} \cdots \overline{p-1} = \bar{1} \cdot \overline{p-1} = \overline{p-1}$. 
+		Thus, $\bar{1} \cdot \bar{2} \cdot \bar{3} \cdots \overline{p-1} = \bar{1} \cdot \overline{p-1} = \overline{p-1}$.
 		Then 
 		\begin{align*}
 		(\bar{a} \cdot \bar{1})(\bar{a} \cdot \bar{2}) \cdots (\bar{a} \cdot \overline{p-1})
 		&= \underbrace{\bar{a} \cdot \bar{a} \cdots \bar{a}}_{p-1 \text{ times}} \cdot \bar{1} \cdot \bar{2} \cdots \bar{a} \cdots \bar{a}^{-1} \cdots \overline{p-1} \\
 		&= \bar{a}^{p-1} \cdot \overline{p-1}.
 		\end{align*}
-		Moreover, since this multiplication is a binary operation, we know that each product is equal to a unique element in $\Z_p$.
+		Moreover, since this multiplication is a bijection, we know that each product is equal to a unique element in $\Z_p$.
 		Thus, $(\bar{a} \cdot \bar{1})(\bar{a} \cdot \bar{2}) \cdots (\bar{a} \cdot \overline{p-1}) = \bar{1} \cdot \bar{2} \cdots \overline{p-1}$, where the right-hand side is some permutation of the elements in $\Z_p$.
 	\end{proofs}
 	
@@ -731,16 +768,18 @@
 	\begin{example}
 		We would like to test the compositeness of 169. Since $2^3$ is the largest power of two that divides 168, we must find an $\bar{a}\in \Z_{169}$ such that $\bar{a}^{\frac{168}{2^3}} \neq \bar{1}$ and $\bar{a}^{\frac{168}{2^h}} \neq -\bar{1}$ for all $h$, $h=1,2,3$. So, we randomly choose $\overline{19} \in \Z_{169}$ and find that
 		\begin{align*}
-		\overline{19}^{\frac{168}{2^3}} &= \overline{70} \\
-		\overline{19}^{\frac{168}{2^2}} &= -\bar{1} \\
-		\overline{19}^{\frac{168}{2^1}} &= \bar{1}. \\
+		\overline{19}^{\frac{168}{2^3}} = \overline{19}^{21} &= \overline{70} \\
+		\overline{19}^{\frac{168}{2^3}} = \overline{19}^{21} &= \overline{70} \\
+		\overline{19}^{\frac{168}{2^2}} = \overline{19}^{42} &= -\bar{1} \\
+		\overline{19}^{\frac{168}{2^1}} = \overline{19}^{84} &= \bar{1}. \\
 		\end{align*}
 		\theorembreak
 		Because $\overline{19}^{\frac{168}{2^2}} = -\bar{1}$, we cannot conclude that $169$ is composite. So we randomly select a different $\bar{a} \in \Z_{169}$, namely $\bar{a} = \overline{145}$, and this time discover that
 		\begin{align*}
-		\overline{145}^{\frac{168}{2^3}} &= \overline{18} \\
-		\overline{145}^{\frac{168}{2^2}} &= \overline{155} \\
-		\overline{145}^{\frac{168}{2^1}} &= \overline{27}. \\
+		\overline{145}^{\frac{168}{2^3}} = \overline{145}^{21} &= \overline{18} \\		
+		\overline{145}^{\frac{168}{2^3}} = \overline{145}^{21} &= \overline{18} \\
+		\overline{145}^{\frac{168}{2^2}} = \overline{145}^{42} &= \overline{155} \\
+		\overline{145}^{\frac{168}{2^1}} = \overline{145}^{84} &= \overline{27}. \\
 		\end{align*}
 		Hence, $145$ is a Miller-Rabin witness to the compositeness of $169$ and we conclude that $169$ is not prime. 
 	\end{example}
@@ -761,7 +800,7 @@
 \end{frame}
 
 
-\section{Suppose Vector Machine}
+\section{Support Vector Machine}
 
 \begin{frame}
 	\frametitle{Linear Classification with a Twist}
@@ -841,6 +880,8 @@
 	\end{table}
 \end{frame}
 
+\section{Conclusion}
+
 \begin{frame}
 	\frametitle{Conclusion}
 	\begin{center}
@@ -849,7 +890,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Conclusion: Sly Models}
+	\frametitle{Sly Models}
 	
 	\begin{itemize}
 		\item 168 primes between 2 and 1000 (inclusive)
@@ -866,7 +907,8 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Conclusion: Finding the Right $K$}
+	\frametitle{
+		Finding the Right $K$}
 	\begin{center}
 		\includegraphics[height=0.88\textheight]{base_32}
 	\end{center}			
@@ -882,10 +924,31 @@
 \begin{frame}
 	\frametitle{Acknowledgements}
 	\begin{itemize}
+		\item My wife, Nora.
 		\item Professor Tom Edgar
 		\item Professor Yajun An
-		\item My wife, Nora.
 	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\begin{lemma}\label{lemma:1_and_p-1_own_inverses}
+		Let $p$ be prime. If $\bar{a} \in \Z_p$ is its own multiplicative inverse, then $\bar{a} = \bar{1}$ or $\bar{a} = \overline{p-1}$.
+	\end{lemma}
+	
+	\begin{proof}
+		Let $p \in \Z$ be prime, and let $\bar{a} \in \Z_p$ be its own multiplicative inverse.
+		Then $\bar{a} \cdot \bar{a} = \bar{a}^2 = \bar{1}$; that is, $\bar{a}^2 - \bar{1} = (\bar{a} + \bar{1})(\bar{a} - \bar{1}) = \bar{0}$. 
+		By the zero product property, since $\bar{a} + \bar{1} \in \Z_p$ and $\bar{a} - \bar{1} \in \Z_p$ and $(\bar{a} + \bar{1})(\bar{a} - \bar{1}) = \bar{0}$, then either $(\bar{a} + \bar{1}) = \bar{0}$ or $(\bar{a} - \bar{1}) = \bar{0}$. 
+		We will consider both cases.
+		
+		\textbf{Case 1}. If $(\bar{a} + \bar{1}) = \bar{0}$, then $\bar{a} = -\bar{1} = \overline{p-1}$.
+		
+		\textbf{Case 2}. If $(\bar{a} - \bar{1}) = \bar{0}$, then $\bar{a} = \bar{1}$.
+		
+		\noindent Therefore, $\bar{a} = \bar{1}$ or $\bar{a} = \overline{p-1}$.
+	\end{proof}
+	
+
 \end{frame}
 
 

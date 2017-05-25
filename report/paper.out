@@ -1,28 +1,9 @@
-\BOOKMARK [1][-]{section.1}{1. Introduction}{}% 1
-\BOOKMARK [2][-]{subsection.1.1}{1.1. Prime and Composite Numbers}{section.1}% 2
-\BOOKMARK [2][-]{subsection.1.2}{1.2. Divisibility}{section.1}% 3
-\BOOKMARK [1][-]{section.2}{2. The Set of All Congruence Classes}{}% 4
-\BOOKMARK [1][-]{section.3}{3. Algebraic Structures with Zn}{}% 5
-\BOOKMARK [2][-]{subsection.3.1}{3.1. Magma}{section.3}% 6
-\BOOKMARK [2][-]{subsection.3.2}{3.2. Semigroup}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.3}{3.3. Monoid}{section.3}% 8
-\BOOKMARK [2][-]{subsection.3.4}{3.4. Group}{section.3}% 9
-\BOOKMARK [2][-]{subsection.3.5}{3.5. Ring}{section.3}% 10
-\BOOKMARK [2][-]{subsection.3.6}{3.6. Field}{section.3}% 11
-\BOOKMARK [1][-]{section.4}{4. A Probabilistic Test for Compositeness}{}% 12
-\BOOKMARK [2][-]{subsection.4.1}{4.1. Fermat's Test}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.2}{4.2. Miller-Rabin Test}{section.4}% 14
-\BOOKMARK [2][-]{subsection.4.3}{4.3. Effectiveness of the Miller-Rabin Test}{section.4}% 15
-\BOOKMARK [1][-]{section.5}{5. Support Vector Machine for Binary Classification}{}% 16
-\BOOKMARK [2][-]{subsection.5.1}{5.1. Kernel Induced Feature Spaces}{section.5}% 17
-\BOOKMARK [2][-]{subsection.5.2}{5.2. Learning Bias}{section.5}% 18
-\BOOKMARK [2][-]{subsection.5.3}{5.3. Learning Algorithm}{section.5}% 19
-\BOOKMARK [1][-]{section.6}{6. Method}{}% 20
-\BOOKMARK [2][-]{subsection.6.1}{6.1. Features}{section.6}% 21
-\BOOKMARK [2][-]{subsection.6.2}{6.2. Training}{section.6}% 22
-\BOOKMARK [2][-]{subsection.6.3}{6.3. Testing}{section.6}% 23
-\BOOKMARK [1][-]{section.7}{7. Conclusion}{}% 24
-\BOOKMARK [1][-]{appendix.A}{Appendix A. Implementation of Fermat's Test}{}% 25
-\BOOKMARK [1][-]{section*.2}{List of Figures}{}% 26
-\BOOKMARK [1][-]{section*.3}{List of Tables}{}% 27
-\BOOKMARK [1][-]{section*.4}{References}{}% 28
+\BOOKMARK [1][-]{section.0.1}{\376\377\000I\000n\000t\000r\000o\000d\000u\000c\000t\000i\000o\000n}{}% 1
+\BOOKMARK [1][-]{section.0.2}{\376\377\000B\000a\000c\000k\000g\000r\000o\000u\000n\000d\000\040\000f\000o\000r\000\040\000t\000h\000e\000\040\000M\000i\000l\000l\000e\000r\000-\000R\000a\000b\000i\000n\000\040\000T\000e\000s\000t}{}% 2
+\BOOKMARK [1][-]{section.0.3}{\376\377\000A\000\040\000P\000r\000o\000b\000a\000b\000i\000l\000i\000s\000t\000i\000c\000\040\000T\000e\000s\000t\000\040\000f\000o\000r\000\040\000C\000o\000m\000p\000o\000s\000i\000t\000e\000n\000e\000s\000s}{}% 3
+\BOOKMARK [1][-]{section.0.4}{\376\377\000S\000u\000p\000p\000o\000r\000t\000\040\000V\000e\000c\000t\000o\000r\000\040\000M\000a\000c\000h\000i\000n\000e\000\040\000f\000o\000r\000\040\000B\000i\000n\000a\000r\000y\000\040\000C\000l\000a\000s\000s\000i\000f\000i\000c\000a\000t\000i\000o\000n}{}% 4
+\BOOKMARK [1][-]{section.0.5}{\376\377\000C\000o\000n\000c\000l\000u\000s\000i\000o\000n}{}% 5
+\BOOKMARK [1][-]{section.Alph0.1}{\376\377\000M\000i\000l\000l\000e\000r\000-\000R\000a\000b\000i\000n\000\040\000T\000e\000s\000t\000\040\000R\000e\000s\000u\000l\000t\000s\000\040\000f\000o\000r\000\040\0001\0006\0009}{}% 6
+\BOOKMARK [1][-]{section.Alph0.2}{\376\377\000F\000i\000n\000d\000i\000n\000g\000\040\000t\000h\000e\000\040\000E\000x\000p\000o\000n\000e\000n\000t\000s}{}% 7
+\BOOKMARK [1][-]{section.Alph0.3}{\376\377\000B\000e\000s\000t\000\040\000P\000a\000r\000a\000m\000e\000t\000e\000r\000s}{}% 8
+\BOOKMARK [0][-]{appendix.A}{\376\377\000B\000i\000b\000l\000i\000o\000g\000r\000a\000p\000h\000y}{}% 9

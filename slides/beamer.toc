@@ -1,5 +1,6 @@
 \beamer@endinputifotherversion {3.36pt}
 \beamer@sectionintoc {1}{Introduction}{2}{0}{1}
-\beamer@sectionintoc {2}{Structure of ${\mathbb Z}_n$}{14}{0}{2}
-\beamer@sectionintoc {3}{Miller-Rabin Test}{50}{0}{3}
-\beamer@sectionintoc {4}{Suppose Vector Machine}{58}{0}{4}
+\beamer@sectionintoc {2}{Structure of ${\mathbb Z}_n$}{15}{0}{2}
+\beamer@sectionintoc {3}{Miller-Rabin Test}{42}{0}{3}
+\beamer@sectionintoc {4}{Support Vector Machine}{50}{0}{4}
+\beamer@sectionintoc {5}{Conclusion}{60}{0}{5}

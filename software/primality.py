@@ -19,6 +19,11 @@ def trial_division(n):
 
     return True
 
+def is_prime_factor(a, n):
+    if (n / a) % 1 == 0:
+        if trial_division(a):
+            return True
+    return False
 
 def fermats_test(n):
 
